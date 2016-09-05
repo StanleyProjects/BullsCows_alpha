@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/purple</color>
+    <color name="colorPrimaryDark">@color/purple</color>
+    <color name="colorAccent">@color/purple</color>
+
+    <color name="purpledark">#4A148C</color>
+    <color name="purplelight">#9575CD</color>
+    <color name="purple">#9C27B0</color>
+    <color name="purple_trans">#809C27B0</color>
+
+    <color name="white">#ffffff</color>
+    <color name="white_trans">#80ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_trans">#80000000</color>
+
+    <color name="gold">#FFC107</color>
+    <color name="red">#F44336</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="green">#4CAF50</color>
+    <color name="gold_trans">#80FFC107</color>
+    <color name="red_trans">#80F44336</color>
+    <color name="green_trans">#804CAF50</color>
+</resources>

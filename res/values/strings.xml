@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BullsCows</string>
+    <string name="offer_count">Count elements of combination</string>
+    <string name="combination_element_can_be">Combination element can be</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="go">GO!</string>
+    <string name="add_offer_dialog_label">Add offer</string>
+    <string name="ok">Ok</string>
+    <string name="offers_list_submessage_empty">To start the game offer your first version</string>
+    <string name="offers_list_submessage_begin_game">The clock is ticking!</string>
+    <string name="offers_made">Offers made:</string>
+    <string name="time_spend">Time spent:</string>
+    <string name="seconds">sec</string>
+    <string name="gold_earned">Gold earned:</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="you_lose">You lose!</string>
+</resources>
