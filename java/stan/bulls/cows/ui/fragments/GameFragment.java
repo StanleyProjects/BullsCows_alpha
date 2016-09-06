@@ -1,12 +1,17 @@
 package stan.bulls.cows.ui.fragments;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -21,6 +26,7 @@ import stan.bulls.cows.logic.BullsCowsLogic;
 import stan.bulls.cows.marks.GameMark;
 import stan.bulls.cows.ui.adapters.BullsCowsAdapter;
 import stan.bulls.cows.ui.fragments.dialogs.AddOfferDialog;
+import stan.bulls.cows.ui.views.progress.CircleProgressView;
 
 public class GameFragment
         extends Fragment
@@ -38,6 +44,15 @@ public class GameFragment
     }
 
     //___________________VIEWS
+    private View results_frame;
+    private View time_game;
+    private CircleProgressView progress;
+    private View time_is_over;
+    private View time_offer;
+    private TextView time;
+    private View try_left;
+    private TextView try_count;
+
     private View offers_list_submessage_ll;
     private TextView offers_list_submessage;
     private RecyclerView list;
@@ -49,7 +64,28 @@ public class GameFragment
     private Offer secret;
     private int offersCount;
     private long date;
+    private CountDownTimer timeGame;
 
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        progress.clearAnimation();
+        if(timeGame != null)
+        {
+            timeGame.cancel();
+        }
+    }
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        if(timeGame != null)
+        {
+            timeGame.cancel();
+            initProgressFromDifficult();
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -60,6 +96,12 @@ public class GameFragment
     }
     private void initViews(View v)
     {
+        results_frame = v.findViewById(R.id.results_frame);
+        time_game = v.findViewById(R.id.time_game);
+        time_is_over = v.findViewById(R.id.time_is_over);
+        time_offer = v.findViewById(R.id.time_offer);
+        try_left = v.findViewById(R.id.try_left);
+        progress = (CircleProgressView) v.findViewById(R.id.progress);
         offers_list_submessage_ll = v.findViewById(R.id.offers_list_submessage_ll);
         offers_list_submessage = (TextView) v.findViewById(R.id.offers_list_submessage);
         list = (RecyclerView) v.findViewById(R.id.list);
@@ -81,6 +123,63 @@ public class GameFragment
         gameSettings.count = getArguments().getInt(COUNT_KEY);
         gameSettings.difficult = getArguments().getInt(DIFFICULT_KEY);
         offers_list_submessage_ll.setVisibility(View.VISIBLE);
+        initResultsFrame();
+    }
+    private void initResultsFrame()
+    {
+        results_frame.setVisibility(View.GONE);
+        time_game.setVisibility(View.GONE);
+        time_offer.setVisibility(View.GONE);
+        try_left.setVisibility(View.GONE);
+    }
+
+    private void initFromDifficult()
+    {
+        results_frame.setVisibility(View.VISIBLE);
+        int d = gameSettings.getDifficultLevel();
+        switch (d)
+        {
+            case 5:
+                try_left.setVisibility(View.VISIBLE);
+            case 4:
+                time_offer.setVisibility(View.VISIBLE);
+            case 3:
+                time_game.setVisibility(View.VISIBLE);
+                time_is_over.setVisibility(View.GONE);
+                initProgressFromDifficult();
+            case 2:
+            case 1:
+        }
+    }
+    private void initProgressFromDifficult()
+    {
+        progress.setMaxProgress(gameSettings.getTimeGame());
+        progress.setColor(getActivity().getResources().getColor(R.color.colorPrimary));
+        progress.setThickness((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getActivity().getResources().getDisplayMetrics()));
+        long currentTime = System.currentTimeMillis() - date;
+        progress.setCurrentProgress(currentTime);
+        RotateAnimation r;
+        r = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        r.setDuration(gameSettings.getDifficultLevel()*500);
+        r.setRepeatMode(Animation.RESTART);
+        r.setRepeatCount(Animation.INFINITE);
+        r.setInterpolator(new LinearInterpolator());
+        progress.setAnimation(r);
+        timeGame = new CountDownTimer(gameSettings.getTimeGame() - currentTime, gameSettings.getTimeGame()/1000*(6-gameSettings.getDifficultLevel()))
+        {
+            @Override
+            public void onTick(long l)
+            {
+                progress.setCurrentProgress(System.currentTimeMillis() - date);
+            }
+            @Override
+            public void onFinish()
+            {
+                progress.clearAnimation();
+                progress.setVisibility(View.GONE);
+                time_is_over.setVisibility(View.VISIBLE);
+            }
+        }.start();
     }
 
     private void newOffer(Offer newOffer)
@@ -89,6 +188,7 @@ public class GameFragment
         {
             setSecretFromFirstOffer(newOffer);
             date = System.currentTimeMillis();
+            initFromDifficult();
         }
         else
         {
@@ -106,7 +206,14 @@ public class GameFragment
     {
         if(count == 1)
         {
-            offers_list_submessage.setText(R.string.offers_list_submessage_begin_game);
+            if(gameSettings.getDifficultLevel() > 2)
+            {
+                offers_list_submessage.setText(R.string.offers_list_submessage_begin_game);
+            }
+            else
+            {
+                offers_list_submessage_ll.setVisibility(View.GONE);
+            }
         }
         else if (count == 2)
         {
@@ -158,6 +265,7 @@ public class GameFragment
             resultGame.gold_earned = 0;
             listener.result(resultGame);
         }
+        refreshUIFromEndGame();
     }
     private int calculateGoldEarned()
     {
@@ -165,6 +273,17 @@ public class GameFragment
         gold += gameSettings.difficult - 3;
         gold += gameSettings.count/3;
         return gold;
+    }
+
+    private void refreshUIFromEndGame()
+    {
+        if(timeGame != null)
+        {
+            timeGame.cancel();
+            timeGame = null;
+        }
+        progress.clearAnimation();
+        progress.setVisibility(View.GONE);
     }
 
     private void addOffer()

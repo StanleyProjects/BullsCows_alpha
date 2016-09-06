@@ -16,4 +16,6 @@
     <string name="gold_earned">Gold earned:</string>
     <string name="congratulations">Congratulations!</string>
     <string name="you_lose">You lose!</string>
+    <string name="try_count">try</string>
+    <string name="time_is_over">Time is over</string>
 </resources>

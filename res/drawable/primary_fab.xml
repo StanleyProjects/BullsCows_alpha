@@ -11,23 +11,11 @@
             </item>
             <item>
                 <shape android:shape="oval">
-                    <solid android:color="@color/white_trans"/>
+                    <solid android:color="@color/black_trans"/>
                 </shape>
             </item>
         </layer-list>
     </item>
-    <!--<item-->
-        <!--android:state_selected="true">-->
-        <!--<shape android:shape="oval">-->
-            <!--<solid android:color="@color/purple"/>-->
-        <!--</shape>-->
-    <!--</item>-->
-    <!--<item-->
-        <!--android:state_pressed="true">-->
-        <!--<shape android:shape="oval">-->
-            <!--<solid android:color="@color/purple"/>-->
-        <!--</shape>-->
-    <!--</item>-->
     <item>
         <shape android:shape="oval">
             <solid android:color="@color/purple"/>

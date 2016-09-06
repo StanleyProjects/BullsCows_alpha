@@ -10,7 +10,7 @@
 
     </FrameLayout>
     <FrameLayout
-        android:layout_weight="5"
+        android:layout_weight="7"
         android:layout_width="0dp"
         android:layout_height="match_parent">
         <TextView
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"/>
     </FrameLayout>
     <FrameLayout
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent">
         <ImageView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"/>
     </FrameLayout>
     <include
-        android:layout_weight="4"
+        android:layout_weight="5"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         layout="@layout/bulls_cows_view"/>

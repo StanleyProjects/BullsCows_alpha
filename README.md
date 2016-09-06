@@ -8,8 +8,8 @@ new version BullsCows app for published in the google play
 	applicationId "stan.bulls.cows"
 	minSdkVersion 15
 	targetSdkVersion 24
-	versionCode 1609060030
-	versionName "0.05uifabkeyboard"
+	versionCode 1609062020
+	versionName "0.06difficults"
 ## dependencies
 	com.android.support:appcompat-v7:24.1.1
 	com.android.support:recyclerview-v7:24.1.1
