@@ -36,6 +36,13 @@ public class ResultGameDialog
     TextView quality_reward_count;
     View quality_mulct;
     TextView quality_mulct_count;
+    View quality_end_game;
+
+    View time_game_reward;
+    TextView time_game_reward_count;
+    View time_game_mulct;
+    TextView time_game_mulct_count;
+    View time_game_end_game;
 
     //___________________FIELDS
     private ResultGameDialogListener listener;
@@ -69,15 +76,29 @@ public class ResultGameDialog
         time_spend = (TextView) v.findViewById(R.id.time_spend);
         gold_earned = (TextView) v.findViewById(R.id.gold_earned);
         gold_earned_ll = v.findViewById(R.id.gold_earned_ll);
+
         quality_reward = v.findViewById(R.id.quality_reward);
         quality_reward_count = (TextView) v.findViewById(R.id.quality_reward_count);
         quality_mulct = v.findViewById(R.id.quality_mulct);
         quality_mulct_count = (TextView) v.findViewById(R.id.quality_mulct_count);
+        quality_end_game = v.findViewById(R.id.quality_end_game);
+
+        time_game_reward = v.findViewById(R.id.time_game_reward);
+        time_game_reward_count = (TextView) v.findViewById(R.id.time_game_reward_count);
+        time_game_mulct = v.findViewById(R.id.time_game_mulct);
+        time_game_mulct_count = (TextView) v.findViewById(R.id.time_game_mulct_count);
+        time_game_end_game = v.findViewById(R.id.time_game_end_game);
     }
     private void init()
     {
         quality_reward.setVisibility(View.GONE);
         quality_mulct.setVisibility(View.GONE);
+        quality_end_game.setVisibility(View.GONE);
+
+        time_game_reward.setVisibility(View.GONE);
+        time_game_mulct.setVisibility(View.GONE);
+        time_game_end_game.setVisibility(View.GONE);
+
         amount_offers.setText(resultGame.amount_offers + "");
         time_spend.setText((resultGame.time_spend / 1000) + "");
         if(resultGame.win)
@@ -86,24 +107,45 @@ public class ResultGameDialog
         }
         else
         {
-            result_game_label.setText(R.string.you_lose);
-            gold_earned_ll.setVisibility(View.GONE);
+            initLose();
         }
     }
-
     private void initWin()
     {
         result_game_label.setText(R.string.congratulations);
         gold_earned.setText(resultGame.gold_earned + "");
-        if(resultGame.gameSettings.isQualityReward())
+        if(resultGame.gameSettings.quality.isReward())
         {
             quality_reward.setVisibility(View.VISIBLE);
-            quality_reward_count.setText(resultGame.gameSettings.getQualityReward() + "");
+            quality_reward_count.setText(resultGame.gameSettings.quality.getReward() + "");
         }
-        else if(resultGame.gameSettings.isQualityMulct())
+        else if(resultGame.gameSettings.quality.isMulct())
         {
             quality_mulct.setVisibility(View.VISIBLE);
-            quality_mulct_count.setText(resultGame.gameSettings.getQualityMulct() + "");
+            quality_mulct_count.setText(resultGame.gameSettings.quality.getMulct() + "");
+        }
+        if(resultGame.gameSettings.time_game.isReward())
+        {
+            time_game_reward.setVisibility(View.VISIBLE);
+            time_game_reward_count.setText(resultGame.gameSettings.time_game.getReward() + "");
+        }
+        else if(resultGame.gameSettings.time_game.isMulct())
+        {
+            time_game_mulct.setVisibility(View.VISIBLE);
+            time_game_mulct_count.setText(resultGame.gameSettings.time_game.getMulct() + "");
+        }
+    }
+    private void initLose()
+    {
+        result_game_label.setText(R.string.you_lose);
+        gold_earned_ll.setVisibility(View.GONE);
+        if(resultGame.gameSettings.quality.isEndGame())
+        {
+            quality_end_game.setVisibility(View.VISIBLE);
+        }
+        else if(resultGame.gameSettings.time_game.isEndGame())
+        {
+            time_game_end_game.setVisibility(View.VISIBLE);
         }
     }
 

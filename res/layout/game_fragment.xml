@@ -56,6 +56,30 @@
         <!--android:theme="@style/PrimaryButton"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"/>-->
+    <LinearLayout
+        android:id="@+id/easy_lable"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:background="@drawable/white_primary_border"
+        android:orientation="vertical"
+        android:layout_width="100dp"
+        android:layout_height="56dp">
+        <TextView
+            android:text="@string/easy"
+            android:textColor="@color/green"
+            android:textAllCaps="true"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="@string/unrewarded"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     <FrameLayout
         android:id="@+id/results_frame"
         android:layout_gravity="bottom"

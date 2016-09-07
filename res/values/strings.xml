@@ -20,4 +20,13 @@
     <string name="time_is_over">Time is over</string>
     <string name="quality_reward">quality reward</string>
     <string name="quality_mulct">quality mulct</string>
+    <string name="quality_end_game">too much mistakes</string>
+    <string name="time_game_reward">game time reward</string>
+    <string name="time_game_mulct">game time mulct</string>
+    <string name="time_game_end_game">too long</string>
+    <string name="unrewarded">unrewarded</string>
+    <string name="check_quality">check quality</string>
+    <string name="note_the_time">note the time</string>
+    <string name="with_mulct">with mulct</string>
+    <string name="can_lose">can lose</string>
 </resources>

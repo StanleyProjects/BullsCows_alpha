@@ -2,6 +2,7 @@ package stan.bulls.cows.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.Difficults;
+import stan.bulls.cows.core.GameSettings;
 import stan.bulls.cows.helpers.PreferenceHelper;
 import stan.bulls.cows.ui.activities.GameActivity;
 import stan.bulls.cows.ui.views.selectors.DifficultSelector;
@@ -23,12 +25,16 @@ public class SandBoxFragment
     private SeekBar game_count_seek;
     private DifficultSelector difficult;
     private TextView game_max_amount_text;
+    private View easy_lable;
+    private View check_quality;
+    private View note_the_time;
+    private View with_mulct;
+    private View can_lose;
 
     //___________________FIELDS
     private int countMax = 6;
     private int countMin = 3;
-    private int count;
-    private int amountDifficult;
+    private GameSettings gameSettings;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -53,6 +59,11 @@ public class SandBoxFragment
                 startGame();
             }
         });
+        easy_lable = v.findViewById(R.id.easy_lable);
+        check_quality = v.findViewById(R.id.check_quality);
+        note_the_time = v.findViewById(R.id.note_the_time);
+        with_mulct = v.findViewById(R.id.with_mulct);
+        can_lose = v.findViewById(R.id.can_lose);
     }
     private void init()
     {
@@ -61,8 +72,8 @@ public class SandBoxFragment
             @Override
             public void setDifficult(int dif)
             {
-                amountDifficult = dif;
-                game_max_amount_text.setText(amountDifficult+"");
+                gameSettings.difficult = dif;
+                updateFromGameSettings();
             }
         });
         game_count_seek.setMax(countMax-countMin);
@@ -86,19 +97,45 @@ public class SandBoxFragment
 
             }
         });
-        amountDifficult = Difficults.DIFFICULT_EASY;
-        game_max_amount_text.setText(amountDifficult+"");
-        count = countMin;
-        game_count_value.setText(""+count);
+        gameSettings = new GameSettings(countMin, Difficults.DIFFICULT_EASY);
         refreshGold();
+        updateFromGameSettings();
     }
 
     private void setCount(int c)
     {
         if(c >= countMin && c <= countMax)
         {
-            count = c;
-            game_count_value.setText(""+count);
+            gameSettings.count = c;
+        }
+        updateFromGameSettings();
+    }
+
+    private void updateFromGameSettings()
+    {
+        game_max_amount_text.setText(gameSettings.difficult+"");
+        game_count_value.setText(""+gameSettings.count);
+        int d = gameSettings.getDifficultLevel();
+        Log.e(GameFragment.class.getCanonicalName(), "dif = " + d);
+        easy_lable.setVisibility(View.GONE);
+        check_quality.setVisibility(View.GONE);
+        note_the_time.setVisibility(View.GONE);
+        with_mulct.setVisibility(View.GONE);
+        can_lose.setVisibility(View.GONE);
+        switch (d)
+        {
+            case 5:
+                can_lose.setVisibility(View.VISIBLE);
+            case 4:
+            case 3:
+                with_mulct.setVisibility(View.VISIBLE);
+            case 2:
+                note_the_time.setVisibility(View.VISIBLE);
+            case 1:
+                check_quality.setVisibility(View.VISIBLE);
+                break;
+            case 0:
+                easy_lable.setVisibility(View.VISIBLE);
         }
     }
 
@@ -109,6 +146,6 @@ public class SandBoxFragment
 
     private void startGame()
     {
-        GameActivity.startGame(getActivity(), count, amountDifficult);
+        GameActivity.startGame(getActivity(), gameSettings.count, gameSettings.difficult);
     }
 }

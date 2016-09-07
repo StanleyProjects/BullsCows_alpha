@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 import stan.bulls.cows.R;
+import stan.bulls.cows.core.GameResult;
 import stan.bulls.cows.core.GameSettings;
 import stan.bulls.cows.core.ResultGame;
 import stan.bulls.cows.core.offers.NumberOffer;
@@ -46,6 +47,9 @@ public class GameFragment
 
     //___________________VIEWS
     private View results_frame;
+
+    private View easy_lable;
+
     private View time_game;
     private CircleProgressView progress;
     private View time_is_over;
@@ -98,6 +102,7 @@ public class GameFragment
     private void initViews(View v)
     {
         results_frame = v.findViewById(R.id.results_frame);
+        easy_lable = v.findViewById(R.id.easy_lable);
         time_game = v.findViewById(R.id.time_game);
         time_is_over = v.findViewById(R.id.time_is_over);
         time_offer = v.findViewById(R.id.time_offer);
@@ -121,10 +126,16 @@ public class GameFragment
         adapter.setCheckingQuality(false);
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(adapter);
-        gameSettings = new GameSettings();
-        gameSettings.count = getArguments().getInt(COUNT_KEY);
-        gameSettings.difficult = getArguments().getInt(DIFFICULT_KEY);
+        gameSettings = new GameSettings(getArguments().getInt(COUNT_KEY), getArguments().getInt(DIFFICULT_KEY));
         offers_list_submessage_ll.setVisibility(View.VISIBLE);
+        if(gameSettings.getDifficultLevel() > 0)
+        {
+            easy_lable.setVisibility(View.GONE);
+        }
+        else
+        {
+            easy_lable.setVisibility(View.VISIBLE);
+        }
         initResultsFrame();
     }
     private void initResultsFrame()
@@ -153,6 +164,7 @@ public class GameFragment
                 initProgressFromDifficult();
             case 1:
                 adapter.setCheckingQuality(true);
+                break;
             case 0:
         }
     }
@@ -176,6 +188,7 @@ public class GameFragment
             public void onTick(long l)
             {
                 progress.setCurrentProgress(System.currentTimeMillis() - date);
+                gameSettings.time_game.updateResult((int)(System.currentTimeMillis() - date));
             }
             @Override
             public void onFinish()
@@ -183,6 +196,11 @@ public class GameFragment
                 progress.clearAnimation();
                 progress.setVisibility(View.GONE);
                 time_is_over.setVisibility(View.VISIBLE);
+                gameSettings.time_game.updateResult((int)(System.currentTimeMillis() - date));
+                if(checkLose())
+                {
+                    endWinGame(false);
+                }
             }
         }.start();
     }
@@ -203,7 +221,7 @@ public class GameFragment
                 BullsCowsLogic.checkQualityOffer(newOffer, adapter.getData());
                 if(!newOffer.quality)
                 {
-                    gameSettings.quality++;
+                    gameSettings.quality.updateResult(gameSettings.quality.getResult()+1);
                 }
             }
         }
@@ -223,7 +241,7 @@ public class GameFragment
     {
         if(count == 1)
         {
-            if(gameSettings.getDifficultLevel() > 2)
+            if(gameSettings.getDifficultLevel() > 1)
             {
                 offers_list_submessage.setText(R.string.offers_list_submessage_begin_game);
             }
@@ -265,7 +283,11 @@ public class GameFragment
     }
     private boolean checkLose()
     {
-        if(gameSettings.isQualityEndGame())
+        if(gameSettings.quality.isEndGame())
+        {
+            return true;
+        }
+        if(gameSettings.time_game.isEndGame())
         {
             return true;
         }
@@ -297,17 +319,24 @@ public class GameFragment
     {
         int gold = 0;
         gold += gameSettings.getDifficultLevel() * (gameSettings.count-2);
-        if(gameSettings.isQualityReward())
-        {
-            gold += gameSettings.getQualityReward();
-        }
-        else if(gameSettings.isQualityMulct())
-        {
-            gold -= gameSettings.getQualityMulct();
-        }
+        gold += calculateGoldEarnedFromResult(gameSettings.quality);
+        gold += calculateGoldEarnedFromResult(gameSettings.time_game);
         if(gold < 0)
         {
             gold = 0;
+        }
+        return gold;
+    }
+    private int calculateGoldEarnedFromResult(GameResult result)
+    {
+        int gold = 0;
+        if(result.isReward())
+        {
+            gold += result.getReward();
+        }
+        else if(result.isMulct())
+        {
+            gold -= result.getMulct();
         }
         return gold;
     }
