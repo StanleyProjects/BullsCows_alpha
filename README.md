@@ -4,12 +4,12 @@ new version BullsCows app for published in the google play
 # Build information
 ## defaultConfig
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    buildToolsVersion "24.0.1"
 	applicationId "stan.bulls.cows"
 	minSdkVersion 15
 	targetSdkVersion 24
-	versionCode 1609062020
-	versionName "0.06difficults"
+	versionCode 1609071602
+	versionName "0.07quality"
 ## dependencies
 	com.android.support:appcompat-v7:24.1.1
 	com.android.support:recyclerview-v7:24.1.1

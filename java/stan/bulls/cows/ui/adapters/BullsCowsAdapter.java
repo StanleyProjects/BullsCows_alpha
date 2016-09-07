@@ -22,11 +22,13 @@ public class BullsCowsAdapter
 
     private Context context;
     private ArrayList<Offer> data;
+    private boolean checkingQuality;
 
     public BullsCowsAdapter(Context c)
     {
         context = c;
         data = new ArrayList<>();
+        checkingQuality = false;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class BullsCowsAdapter
         holder.offer_value.setText(data.get(p).getStringValues());
         holder.offer_bulls.setText(data.get(p).bulls + "");
         holder.offer_cows.setText(data.get(p).cows + "");
-        if(checkQualityOffer(data.get(p), p))
+        if(!checkingQuality || data.get(p).quality)
         {
            holder.quality.setVisibility(View.GONE);
         }
@@ -112,29 +114,19 @@ public class BullsCowsAdapter
         return FOOTER_TYPE;
     }
 
-    private boolean checkQualityOffer(Offer offer, int p)
-    {
-        for(int i = 0; i<p; i++)
-        {
-            Offer o = BullsCowsLogic.checkCountBullsAndCows(new Offer(data.get(i).getOfferElements())
-            {
-                @Override
-                public String getStringValues()
-                {
-                    return null;
-                }
-            }, offer);
-            if(data.get(i).bulls != o.bulls || data.get(i).cows != o.cows)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
     public void addOffer(Offer offer)
     {
         data.add(offer);
         notifyDataSetChanged();
+    }
+    public ArrayList<Offer> getData()
+    {
+        return data;
+    }
+
+    public void setCheckingQuality(boolean q)
+    {
+        checkingQuality = q;
     }
 
     protected class BullsCowsFirstHolder

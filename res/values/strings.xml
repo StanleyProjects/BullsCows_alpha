@@ -18,4 +18,6 @@
     <string name="you_lose">You lose!</string>
     <string name="try_count">try</string>
     <string name="time_is_over">Time is over</string>
+    <string name="quality_reward">quality reward</string>
+    <string name="quality_mulct">quality mulct</string>
 </resources>

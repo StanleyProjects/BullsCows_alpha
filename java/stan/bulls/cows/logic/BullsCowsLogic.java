@@ -1,5 +1,7 @@
 package stan.bulls.cows.logic;
 
+import java.util.ArrayList;
+
 import stan.bulls.cows.core.offers.Offer;
 
 public class BullsCowsLogic
@@ -40,6 +42,28 @@ public class BullsCowsLogic
                 }
             }
         }
+        return offer;
+    }
+
+    static public <OFFER_TYPE extends Offer> OFFER_TYPE checkQualityOffer(OFFER_TYPE offer, ArrayList<Offer> data)
+    {
+        for(int i = 0; i<data.size(); i++)
+        {
+            Offer o = BullsCowsLogic.checkCountBullsAndCows(new Offer(data.get(i).getOfferElements())
+            {
+                @Override
+                public String getStringValues()
+                {
+                    return null;
+                }
+            }, offer);
+            if(data.get(i).bulls != o.bulls || data.get(i).cows != o.cows)
+            {
+                offer.quality = false;
+                return offer;
+            }
+        }
+        offer.quality = true;
         return offer;
     }
 }

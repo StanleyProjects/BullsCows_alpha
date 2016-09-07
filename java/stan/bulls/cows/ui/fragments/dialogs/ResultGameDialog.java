@@ -32,6 +32,11 @@ public class ResultGameDialog
     TextView gold_earned;
     View gold_earned_ll;
 
+    View quality_reward;
+    TextView quality_reward_count;
+    View quality_mulct;
+    TextView quality_mulct_count;
+
     //___________________FIELDS
     private ResultGameDialogListener listener;
     private ResultGame resultGame;
@@ -64,20 +69,41 @@ public class ResultGameDialog
         time_spend = (TextView) v.findViewById(R.id.time_spend);
         gold_earned = (TextView) v.findViewById(R.id.gold_earned);
         gold_earned_ll = v.findViewById(R.id.gold_earned_ll);
+        quality_reward = v.findViewById(R.id.quality_reward);
+        quality_reward_count = (TextView) v.findViewById(R.id.quality_reward_count);
+        quality_mulct = v.findViewById(R.id.quality_mulct);
+        quality_mulct_count = (TextView) v.findViewById(R.id.quality_mulct_count);
     }
     private void init()
     {
+        quality_reward.setVisibility(View.GONE);
+        quality_mulct.setVisibility(View.GONE);
         amount_offers.setText(resultGame.amount_offers + "");
         time_spend.setText((resultGame.time_spend / 1000) + "");
         if(resultGame.win)
         {
-            result_game_label.setText(R.string.congratulations);
-            gold_earned.setText(resultGame.gold_earned + "");
+            initWin();
         }
         else
         {
             result_game_label.setText(R.string.you_lose);
             gold_earned_ll.setVisibility(View.GONE);
+        }
+    }
+
+    private void initWin()
+    {
+        result_game_label.setText(R.string.congratulations);
+        gold_earned.setText(resultGame.gold_earned + "");
+        if(resultGame.gameSettings.isQualityReward())
+        {
+            quality_reward.setVisibility(View.VISIBLE);
+            quality_reward_count.setText(resultGame.gameSettings.getQualityReward() + "");
+        }
+        else if(resultGame.gameSettings.isQualityMulct())
+        {
+            quality_mulct.setVisibility(View.VISIBLE);
+            quality_mulct_count.setText(resultGame.gameSettings.getQualityMulct() + "");
         }
     }
 

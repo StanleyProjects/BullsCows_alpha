@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,6 +118,7 @@ public class GameFragment
     private void init()
     {
         adapter = new BullsCowsAdapter(getActivity());
+        adapter.setCheckingQuality(false);
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(adapter);
         gameSettings = new GameSettings();
@@ -137,18 +139,21 @@ public class GameFragment
     {
         results_frame.setVisibility(View.VISIBLE);
         int d = gameSettings.getDifficultLevel();
+        Log.e(GameFragment.class.getCanonicalName(), "dif = " + d);
         switch (d)
         {
             case 5:
-                try_left.setVisibility(View.VISIBLE);
             case 4:
                 time_offer.setVisibility(View.VISIBLE);
             case 3:
+                try_left.setVisibility(View.VISIBLE);
+            case 2:
                 time_game.setVisibility(View.VISIBLE);
                 time_is_over.setVisibility(View.GONE);
                 initProgressFromDifficult();
-            case 2:
             case 1:
+                adapter.setCheckingQuality(true);
+            case 0:
         }
     }
     private void initProgressFromDifficult()
@@ -193,6 +198,14 @@ public class GameFragment
         else
         {
             BullsCowsLogic.checkCountBullsAndCows(newOffer, secret);
+            if(gameSettings.getDifficultLevel() > 0)
+            {
+                BullsCowsLogic.checkQualityOffer(newOffer, adapter.getData());
+                if(!newOffer.quality)
+                {
+                    gameSettings.quality++;
+                }
+            }
         }
         adapter.addOffer(newOffer);
         offersCount++;
@@ -200,6 +213,10 @@ public class GameFragment
         if(checkWin(newOffer))
         {
             endWinGame(true);
+        }
+        else if(checkLose())
+        {
+            endWinGame(false);
         }
     }
     private void refreshUIFromOffersCount(int count)
@@ -246,11 +263,20 @@ public class GameFragment
     {
         return offer.bulls == secret.getLenght();
     }
+    private boolean checkLose()
+    {
+        if(gameSettings.isQualityEndGame())
+        {
+            return true;
+        }
+        return false;
+    }
     private void endWinGame(boolean win)
     {
         offers_list_submessage_ll.setVisibility(View.GONE);
         ResultGame resultGame = new ResultGame();
         resultGame.time_spend = System.currentTimeMillis() - date;
+        resultGame.gameSettings = gameSettings;
         if(win)
         {
             resultGame.win = true;
@@ -270,8 +296,19 @@ public class GameFragment
     private int calculateGoldEarned()
     {
         int gold = 0;
-        gold += gameSettings.difficult - 3;
-        gold += gameSettings.count/3;
+        gold += gameSettings.getDifficultLevel() * (gameSettings.count-2);
+        if(gameSettings.isQualityReward())
+        {
+            gold += gameSettings.getQualityReward();
+        }
+        else if(gameSettings.isQualityMulct())
+        {
+            gold -= gameSettings.getQualityMulct();
+        }
+        if(gold < 0)
+        {
+            gold = 0;
+        }
         return gold;
     }
 

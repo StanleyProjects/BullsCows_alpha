@@ -14,6 +14,7 @@
         android:textColor="@color/purple"
         android:textSize="16dp"/>
     <LinearLayout
+        android:padding="4dp"
         android:orientation="vertical"
         android:layout_width="288dp"
         android:layout_height="wrap_content">
@@ -115,9 +116,80 @@
                     android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0px"/>
+        <LinearLayout
+            android:layout_marginLeft="48dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/quality_reward"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_check_white_24dp"
+                    android:tint="@color/green"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"/>
+                <TextView
+                    android:text="@string/quality_reward"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginLeft="4dp"
+                    android:text="+"
+                    android:textColor="@color/green"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/quality_reward_count"
+                    android:text="12"
+                    android:textColor="@color/green"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/quality_mulct"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_check_white_24dp"
+                    android:tint="@color/red"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"/>
+                <TextView
+                    android:text="@string/quality_mulct"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginLeft="4dp"
+                    android:text="-"
+                    android:textColor="@color/red"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/quality_mulct_count"
+                    android:text="12"
+                    android:textColor="@color/red"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
     <TextView
         android:id="@+id/result_ok"
