@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import stan.bulls.cows.R;
-import stan.bulls.cows.core.offers.Offer;
-import stan.bulls.cows.logic.BullsCowsLogic;
+import stan.bulls.cows.models.OfferListItem;
 
 public class BullsCowsAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -21,14 +21,16 @@ public class BullsCowsAdapter
     static public final int OFFER_FIRST_TYPE = 2;
 
     private Context context;
-    private ArrayList<Offer> data;
+    private ArrayList<OfferListItem> data;
     private boolean checkingQuality;
+    private boolean checkingTime;
 
     public BullsCowsAdapter(Context c)
     {
         context = c;
         data = new ArrayList<>();
         checkingQuality = false;
+        checkingTime = false;
     }
 
     @Override
@@ -64,15 +66,15 @@ public class BullsCowsAdapter
     }
     private void initFirstOffer(BullsCowsFirstHolder holder, int p)
     {
-        holder.offer_value.setText(data.get(p).getStringValues());
-        holder.offer_bulls.setText(data.get(p).bulls + "");
-        holder.offer_cows.setText(data.get(p).cows + "");
+        holder.offer_value.setText(data.get(p).offer.getStringValues());
+        holder.offer_bulls.setText(data.get(p).offer.bulls + "");
+        holder.offer_cows.setText(data.get(p).offer.cows + "");
     }
     private void initOffer(BullsCowsHolder holder, int p)
     {
-        holder.offer_value.setText(data.get(p).getStringValues());
-        holder.offer_bulls.setText(data.get(p).bulls + "");
-        holder.offer_cows.setText(data.get(p).cows + "");
+        holder.offer_value.setText(data.get(p).offer.getStringValues());
+        holder.offer_bulls.setText(data.get(p).offer.bulls + "");
+        holder.offer_cows.setText(data.get(p).offer.cows + "");
         if(!checkingQuality || data.get(p).quality)
         {
            holder.quality.setVisibility(View.GONE);
@@ -80,6 +82,26 @@ public class BullsCowsAdapter
         else
         {
             holder.quality.setVisibility(View.VISIBLE);
+        }
+        if(checkingTime)
+        {
+            holder.time.setVisibility(View.VISIBLE);
+            switch(data.get(p).time)
+            {
+                case OfferListItem.TIME_OFFER_GOOD:
+                    holder.time.setColorFilter(context.getResources().getColor(R.color.green));
+                    break;
+                case OfferListItem.TIME_OFFER_NEUTRAL:
+                    holder.time.setColorFilter(context.getResources().getColor(R.color.gold));
+                    break;
+                case OfferListItem.TIME_OFFER_BAD:
+                    holder.time.setColorFilter(context.getResources().getColor(R.color.red));
+                    break;
+            }
+        }
+        else
+        {
+            holder.time.setVisibility(View.GONE);
         }
     }
 
@@ -114,12 +136,12 @@ public class BullsCowsAdapter
         return FOOTER_TYPE;
     }
 
-    public void addOffer(Offer offer)
+    public void swapData(ArrayList<OfferListItem> d)
     {
-        data.add(offer);
+        data = d;
         notifyDataSetChanged();
     }
-    public ArrayList<Offer> getData()
+    public ArrayList<OfferListItem> getData()
     {
         return data;
     }
@@ -127,6 +149,10 @@ public class BullsCowsAdapter
     public void setCheckingQuality(boolean q)
     {
         checkingQuality = q;
+    }
+    public void setCheckingTime(boolean t)
+    {
+        checkingTime = t;
     }
 
     protected class BullsCowsFirstHolder
@@ -150,6 +176,7 @@ public class BullsCowsAdapter
         public TextView offer_bulls;
         public TextView offer_cows;
         public View quality;
+        public ImageView time;
         public BullsCowsHolder(View v)
         {
             super(v);
@@ -157,6 +184,7 @@ public class BullsCowsAdapter
             offer_bulls = (TextView)v.findViewById(R.id.offer_bulls);
             offer_cows = (TextView)v.findViewById(R.id.offer_cows);
             quality = v.findViewById(R.id.quality);
+            time = (ImageView)v.findViewById(R.id.time);
         }
     }
     protected class BullsCowsFooterHolder

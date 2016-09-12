@@ -45,7 +45,7 @@ public class BullsCowsLogic
         return offer;
     }
 
-    static public <OFFER_TYPE extends Offer> OFFER_TYPE checkQualityOffer(OFFER_TYPE offer, ArrayList<Offer> data)
+    static public boolean checkQualityOffer(Offer offer, ArrayList<Offer> data)
     {
         for(int i = 0; i<data.size(); i++)
         {
@@ -59,11 +59,9 @@ public class BullsCowsLogic
             }, offer);
             if(data.get(i).bulls != o.bulls || data.get(i).cows != o.cows)
             {
-                offer.quality = false;
-                return offer;
+                return false;
             }
         }
-        offer.quality = true;
-        return offer;
+        return true;
     }
 }

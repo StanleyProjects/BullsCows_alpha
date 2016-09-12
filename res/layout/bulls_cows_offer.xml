@@ -7,7 +7,12 @@
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent">
-
+        <ImageView
+            android:id="@+id/time"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_access_time_white_24dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
     </FrameLayout>
     <FrameLayout
         android:layout_weight="7"

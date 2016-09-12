@@ -5,7 +5,6 @@ public abstract class Offer<OFFER_TYPE extends OfferElement>
     private OFFER_TYPE[] offerElements;
     public int bulls;
     public int cows;
-    public boolean quality;
 
     public Offer(OFFER_TYPE[] oe)
     {

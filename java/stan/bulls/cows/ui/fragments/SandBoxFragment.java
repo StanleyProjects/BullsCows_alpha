@@ -28,7 +28,9 @@ public class SandBoxFragment
     private View easy_lable;
     private View check_quality;
     private View note_the_time;
+    private View note_the_time_offer;
     private View with_mulct;
+    private View check_count_offers;
     private View can_lose;
 
     //___________________FIELDS
@@ -62,7 +64,9 @@ public class SandBoxFragment
         easy_lable = v.findViewById(R.id.easy_lable);
         check_quality = v.findViewById(R.id.check_quality);
         note_the_time = v.findViewById(R.id.note_the_time);
+        note_the_time_offer = v.findViewById(R.id.note_the_time_offer);
         with_mulct = v.findViewById(R.id.with_mulct);
+        check_count_offers = v.findViewById(R.id.check_count_offers);
         can_lose = v.findViewById(R.id.can_lose);
     }
     private void init()
@@ -120,15 +124,19 @@ public class SandBoxFragment
         easy_lable.setVisibility(View.GONE);
         check_quality.setVisibility(View.GONE);
         note_the_time.setVisibility(View.GONE);
+        note_the_time_offer.setVisibility(View.GONE);
         with_mulct.setVisibility(View.GONE);
+        check_count_offers.setVisibility(View.GONE);
         can_lose.setVisibility(View.GONE);
         switch (d)
         {
             case 5:
                 can_lose.setVisibility(View.VISIBLE);
             case 4:
+                check_count_offers.setVisibility(View.VISIBLE);
             case 3:
                 with_mulct.setVisibility(View.VISIBLE);
+                note_the_time_offer.setVisibility(View.VISIBLE);
             case 2:
                 note_the_time.setVisibility(View.VISIBLE);
             case 1:

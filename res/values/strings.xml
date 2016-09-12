@@ -29,4 +29,9 @@
     <string name="note_the_time">note the time</string>
     <string name="with_mulct">with mulct</string>
     <string name="can_lose">can lose</string>
+    <string name="note_the_time_offer">note time one offer</string>
+    <string name="check_count_offers">check count offers</string>
+    <string name="much">much</string>
+    <string name="time_offer_reward">offer time reward</string>
+    <string name="time_offer_mulct">offer time mulct</string>
 </resources>

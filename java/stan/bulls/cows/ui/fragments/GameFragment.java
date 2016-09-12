@@ -15,6 +15,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import stan.bulls.cows.R;
@@ -26,6 +27,7 @@ import stan.bulls.cows.core.offers.NumberOfferElement;
 import stan.bulls.cows.core.offers.Offer;
 import stan.bulls.cows.logic.BullsCowsLogic;
 import stan.bulls.cows.marks.GameMark;
+import stan.bulls.cows.models.OfferListItem;
 import stan.bulls.cows.ui.adapters.BullsCowsAdapter;
 import stan.bulls.cows.ui.fragments.dialogs.AddOfferDialog;
 import stan.bulls.cows.ui.views.progress.CircleProgressView;
@@ -54,7 +56,9 @@ public class GameFragment
     private CircleProgressView progress;
     private View time_is_over;
     private View time_offer;
+    private View time_offer_secconds;
     private TextView time;
+    private View time_offer_much;
     private View try_left;
     private TextView try_count;
 
@@ -69,7 +73,10 @@ public class GameFragment
     private Offer secret;
     private int offersCount;
     private long date;
+    private long dateOffer;
     private CountDownTimer timeGame;
+    private CountDownTimer timeOffer;
+    private ArrayList<OfferListItem> data;
 
     @Override
     public void onStop()
@@ -80,6 +87,10 @@ public class GameFragment
         {
             timeGame.cancel();
         }
+        if(timeOffer != null)
+        {
+            timeOffer.cancel();
+        }
     }
     @Override
     public void onStart()
@@ -89,6 +100,11 @@ public class GameFragment
         {
             timeGame.cancel();
             initProgressFromDifficult();
+        }
+        if(timeOffer != null)
+        {
+            timeOffer.cancel();
+            initTimeOfferFromDifficult();
         }
     }
     @Override
@@ -106,7 +122,11 @@ public class GameFragment
         time_game = v.findViewById(R.id.time_game);
         time_is_over = v.findViewById(R.id.time_is_over);
         time_offer = v.findViewById(R.id.time_offer);
+        time_offer_secconds = v.findViewById(R.id.time_offer_secconds);
+        time_offer_much = v.findViewById(R.id.time_offer_much);
         try_left = v.findViewById(R.id.try_left);
+        time = (TextView) v.findViewById(R.id.time);
+        try_count = (TextView) v.findViewById(R.id.try_count);
         progress = (CircleProgressView) v.findViewById(R.id.progress);
         offers_list_submessage_ll = v.findViewById(R.id.offers_list_submessage_ll);
         offers_list_submessage = (TextView) v.findViewById(R.id.offers_list_submessage);
@@ -122,8 +142,10 @@ public class GameFragment
     }
     private void init()
     {
+        data = new ArrayList<>();
         adapter = new BullsCowsAdapter(getActivity());
         adapter.setCheckingQuality(false);
+        adapter.setCheckingTime(false);
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(adapter);
         gameSettings = new GameSettings(getArguments().getInt(COUNT_KEY), getArguments().getInt(DIFFICULT_KEY));
@@ -155,9 +177,10 @@ public class GameFragment
         {
             case 5:
             case 4:
-                time_offer.setVisibility(View.VISIBLE);
-            case 3:
                 try_left.setVisibility(View.VISIBLE);
+            case 3:
+                time_offer.setVisibility(View.VISIBLE);
+                adapter.setCheckingTime(true);
             case 2:
                 time_game.setVisibility(View.VISIBLE);
                 time_is_over.setVisibility(View.GONE);
@@ -204,9 +227,47 @@ public class GameFragment
             }
         }.start();
     }
+    private void initTimeOfferFromDifficult()
+    {
+        time_offer_secconds.setVisibility(View.VISIBLE);
+        time_offer_much.setVisibility(View.GONE);
+        long currentTime = System.currentTimeMillis() - dateOffer;
+        time.setText(currentTime + "");
+        timeOffer = new CountDownTimer(gameSettings.getTimeOffer() - currentTime, 500)
+        {
+            @Override
+            public void onTick(long l)
+            {
+                long currentTime = System.currentTimeMillis() - dateOffer;
+                time.setText(currentTime/1000 + "");
+            }
+            @Override
+            public void onFinish()
+            {
+                long currentTime = System.currentTimeMillis() - dateOffer;
+                int r = gameSettings.getTimeOffer() * gameSettings.getDifficultLevel();
+                r -= gameSettings.getTimeOffer() * ((gameSettings.getDifficultLevel()-1)/2);
+                r /= gameSettings.getDifficultLevel();
+                if(currentTime > r)
+                {
+                    gameSettings.time_offer.updateResult(gameSettings.time_offer.getResult()+1);
+                }
+                if(checkLose())
+                {
+                    endWinGame(false);
+                }
+                else
+                {
+                    time_offer_secconds.setVisibility(View.GONE);
+                    time_offer_much.setVisibility(View.VISIBLE);
+                }
+            }
+        }.start();
+    }
 
     private void newOffer(Offer newOffer)
     {
+        OfferListItem newOfferListItem = new OfferListItem();
         if(offersCount == 0)
         {
             setSecretFromFirstOffer(newOffer);
@@ -216,16 +277,64 @@ public class GameFragment
         else
         {
             BullsCowsLogic.checkCountBullsAndCows(newOffer, secret);
-            if(gameSettings.getDifficultLevel() > 0)
+            switch (gameSettings.getDifficultLevel())
             {
-                BullsCowsLogic.checkQualityOffer(newOffer, adapter.getData());
-                if(!newOffer.quality)
-                {
-                    gameSettings.quality.updateResult(gameSettings.quality.getResult()+1);
-                }
+                case 5:
+                case 4:
+                case 3:
+                    //
+                    long currentTime = System.currentTimeMillis() - dateOffer;
+                    int r = gameSettings.getTimeOffer() * gameSettings.getDifficultLevel();
+                    r -= gameSettings.getTimeOffer() * ((gameSettings.getDifficultLevel()-1)/2);
+                    r /= gameSettings.getDifficultLevel();
+                    if(currentTime <= r)
+                    {
+                        newOfferListItem.time = OfferListItem.TIME_OFFER_GOOD;
+                    }
+                    else
+                    {
+                        gameSettings.time_offer.updateResult(gameSettings.time_offer.getResult()+1);
+                        int m = gameSettings.getTimeOffer();
+                        m -= gameSettings.getTimeOffer() / ((8-gameSettings.getDifficultLevel())*2);
+                        if(currentTime >= m)
+                        {
+                            newOfferListItem.time = OfferListItem.TIME_OFFER_BAD;
+                        }
+                        else
+                        {
+                            newOfferListItem.time = OfferListItem.TIME_OFFER_NEUTRAL;
+                        }
+                    }
+                case 1:
+                    newOfferListItem.quality = true;
+                    for(int i = 0; i<adapter.getData().size(); i++)
+                    {
+                        Offer o = BullsCowsLogic.checkCountBullsAndCows(new Offer(adapter.getData().get(i).offer.getOfferElements())
+                        {
+                            @Override
+                            public String getStringValues()
+                            {
+                                return null;
+                            }
+                        }, newOffer);
+                        if(adapter.getData().get(i).offer.bulls != o.bulls || adapter.getData().get(i).offer.cows != o.cows)
+                        {
+                            newOfferListItem.quality = false;
+                            gameSettings.quality.updateResult(gameSettings.quality.getResult()+1);
+                            break;
+                        }
+                    }
             }
         }
-        adapter.addOffer(newOffer);
+        if(timeOffer != null)
+        {
+            timeOffer.cancel();
+        }
+        dateOffer = System.currentTimeMillis();
+        initTimeOfferFromDifficult();
+        newOfferListItem.offer = newOffer;
+        data.add(newOfferListItem);
+        adapter.swapData(data);
         offersCount++;
         refreshUIFromOffersCount(offersCount);
         if(checkWin(newOffer))
@@ -291,6 +400,10 @@ public class GameFragment
         {
             return true;
         }
+        if(gameSettings.time_offer.isEndGame())
+        {
+            return true;
+        }
         return false;
     }
     private void endWinGame(boolean win)
@@ -350,6 +463,13 @@ public class GameFragment
         }
         progress.clearAnimation();
         progress.setVisibility(View.GONE);
+        if(timeOffer != null)
+        {
+            timeOffer.cancel();
+            timeOffer = null;
+        }
+        time_offer_secconds.setVisibility(View.GONE);
+        time_offer_much.setVisibility(View.GONE);
     }
 
     private void addOffer()

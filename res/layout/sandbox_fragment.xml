@@ -212,7 +212,9 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:paddingLeft="16dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -228,16 +230,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                         <ImageView
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="6dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
                             android:src="@drawable/ic_check_white_24dp"
                             android:tint="@color/green"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"/>
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"/>
                         <TextView
                             android:text="@string/check_quality"
                             android:textColor="@color/black"
-                            android:textSize="14dp"
+                            android:textSize="12dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
@@ -250,12 +252,32 @@
                         <ImageView
                             android:src="@drawable/ic_timer_white_36dp"
                             android:tint="@color/green"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"/>
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"/>
                         <TextView
                             android:text="@string/note_the_time"
                             android:textColor="@color/black"
-                            android:textSize="14dp"
+                            android:textSize="12dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/with_mulct"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="1dp"
+                            android:src="@drawable/ic_error_white_24dp"
+                            android:tint="@color/red"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"/>
+                        <TextView
+                            android:text="@string/with_mulct"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
@@ -267,22 +289,42 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent">
                     <LinearLayout
-                        android:id="@+id/with_mulct"
+                        android:id="@+id/note_the_time_offer"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                         <ImageView
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="6dp"
-                            android:src="@drawable/ic_error_white_24dp"
-                            android:tint="@color/red"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"/>
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:src="@drawable/ic_access_time_white_24dp"
+                            android:tint="@color/green"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"/>
                         <TextView
-                            android:text="@string/with_mulct"
+                            android:text="@string/note_the_time_offer"
                             android:textColor="@color/black"
-                            android:textSize="14dp"
+                            android:textSize="12dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/check_count_offers"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:src="@drawable/ic_menu_white_24dp"
+                            android:tint="@color/green"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"/>
+                        <TextView
+                            android:text="@string/check_count_offers"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
@@ -295,12 +337,12 @@
                         <ImageView
                             android:src="@drawable/ic_scull36"
                             android:tint="@color/red"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"/>
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"/>
                         <TextView
                             android:text="@string/can_lose"
                             android:textColor="@color/black"
-                            android:textSize="14dp"
+                            android:textSize="12dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
