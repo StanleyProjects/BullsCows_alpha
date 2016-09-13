@@ -2,11 +2,9 @@ package stan.bulls.cows.core;
 
 public interface GameResult
 {
-    boolean isReward();
-    boolean isMulct();
-    boolean isEndGame();
-    int getReward();
-    int getMulct();
-    int getResult();
-    void updateResult(int r);
+    boolean isReward(GameSettings settings);
+    boolean isMulct(GameSettings settings);
+    boolean isEndGame(GameSettings settings);
+    int getReward(GameSettings settings);
+    int getMulct(GameSettings settings);
 }

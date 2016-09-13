@@ -2,172 +2,15 @@ package stan.bulls.cows.core;
 
 import android.util.Log;
 
+import stan.bulls.cows.core.results.QualityGameResult;
+import stan.bulls.cows.core.results.TimeGameResult;
+import stan.bulls.cows.core.results.TimeOfferGameResult;
+
 public class GameSettings
 {
-    public GameResult quality = new GameResult()
-    {
-        private int result;
-        @Override
-        public boolean isReward()
-        {
-            if(getDifficultLevel()<1)
-            {
-                return false;
-            }
-            int r = (getDifficultLevel()+1)/2;
-            return getResult() <= r/4;
-        }
-        @Override
-        public boolean isMulct()
-        {
-            if(getDifficultLevel()<3 || isReward() || isEndGame())
-            {
-                return false;
-            }
-            int m = (getDifficultLevel()+1)/2;
-            return getResult() >= (m/2)*2;
-        }
-        @Override
-        public boolean isEndGame()
-        {
-            if(getDifficultLevel()<5)
-            {
-                return false;
-            }
-            int e = (getDifficultLevel()+1)/2;
-            return getResult() >= e;
-        }
-        @Override
-        public int getReward()
-        {
-            return getDifficultLevel()*(count-2);
-        }
-        @Override
-        public int getMulct()
-        {
-            return getDifficultLevel()*(count-2)/2 + (count-2)*(difficult/3)/2;
-        }
-        @Override
-        public int getResult()
-        {
-            return result;
-        }
-        @Override
-        public void updateResult(int r)
-        {
-            result = r;
-        }
-    };
-    public GameResult time_game = new GameResult()
-    {
-        private int time;
-        @Override
-        public boolean isReward()
-        {
-            if(getDifficultLevel()<2)
-            {
-                return false;
-            }
-            int r = getTimeGame() * getDifficultLevel();
-            r -= getTimeGame() * ((getDifficultLevel()-1)/2);
-            r /= getDifficultLevel();
-            return time <= r;
-        }
-        @Override
-        public boolean isMulct()
-        {
-            if(getDifficultLevel()<3 || isReward() || isEndGame())
-            {
-                return false;
-            }
-            int m = getTimeGame();
-            m -= getTimeGame() / ((8-getDifficultLevel())*2);
-            return time >= m;
-        }
-        @Override
-        public boolean isEndGame()
-        {
-            if(getDifficultLevel()<5)
-            {
-                return false;
-            }
-            return getResult() >= getTimeGame();
-        }
-        @Override
-        public int getReward()
-        {
-            return getDifficultLevel()*(count-1);
-        }
-        @Override
-        public int getMulct()
-        {
-            return getDifficultLevel()*(count-1)/2 + (count-1)*(difficult/3)/2;
-        }
-        @Override
-        public int getResult()
-        {
-            return time;
-        }
-        @Override
-        public void updateResult(int r)
-        {
-            time = r;
-        }
-    };
-    public GameResult time_offer = new GameResult()
-    {
-        private int time;
-        @Override
-        public boolean isReward()
-        {
-            if(getDifficultLevel()<4)
-            {
-                return false;
-            }
-            int r = (getDifficultLevel()+1)/2;
-            return getResult() <= r/4;
-        }
-        @Override
-        public boolean isMulct()
-        {
-            if(getDifficultLevel()<4 || isReward() || isEndGame())
-            {
-                return false;
-            }
-            int m = (getDifficultLevel()+1)/2;
-            return getResult() >= (m/2)*2;
-        }
-        @Override
-        public boolean isEndGame()
-        {
-            if(getDifficultLevel()<4)
-            {
-                return false;
-            }
-            int e = (getDifficultLevel()+1)/2;
-            return getResult() >= e;
-        }
-        @Override
-        public int getReward()
-        {
-            return getDifficultLevel()*(count-2);
-        }
-        @Override
-        public int getMulct()
-        {
-            return getDifficultLevel()*(count-2)/2 + (count-2)*(difficult/3)/2;
-        }
-        @Override
-        public int getResult()
-        {
-            return time;
-        }
-        @Override
-        public void updateResult(int t)
-        {
-            time = t;
-        }
-    };
+    public QualityGameResult quality = new QualityGameResult();
+    public TimeGameResult time_game = new TimeGameResult();
+    public TimeOfferGameResult time_offer = new TimeOfferGameResult();
     public int count;
     public int difficult;
 
@@ -188,8 +31,8 @@ public class GameSettings
         Log.e("quality", "isMulct " + ((getDifficultLevel()+1)/2/2)*2);
         int e = (getDifficultLevel()+1)/2;
         Log.e("quality", "isEndGame " + e);
-        Log.e("quality", "getMulct " + quality.getMulct());
-        Log.e("quality", "getReward " + quality.getReward());
+        Log.e("quality", "getMulct " + quality.getMulct(this));
+        Log.e("quality", "getReward " + quality.getReward(this));
 //        int r = getTimeGame() * getDifficultLevel();
 //        r -= getTimeGame() * ((getDifficultLevel()-1)/2);
 //        r /= getDifficultLevel();
@@ -197,8 +40,8 @@ public class GameSettings
         int m = getTimeGame();
         m -= getTimeGame() / ((8-getDifficultLevel())*2);
         Log.e("time_game", "isMulct " + m);
-        Log.e("time_game", "getMulct " + time_game.getMulct());
-        Log.e("time_game", "getReward " + time_game.getReward());
+        Log.e("time_game", "getMulct " + time_game.getMulct(this));
+        Log.e("time_game", "getReward " + time_game.getReward(this));
     }
 
     public int getDifficultLevel()

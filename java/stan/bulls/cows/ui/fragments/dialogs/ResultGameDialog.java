@@ -130,50 +130,50 @@ public class ResultGameDialog
     {
         result_game_label.setText(R.string.congratulations);
         gold_earned.setText(resultGame.gold_earned + "");
-        if(resultGame.gameSettings.quality.isReward())
+        if(resultGame.gameSettings.quality.isReward(resultGame.gameSettings))
         {
             quality_reward.setVisibility(View.VISIBLE);
-            quality_reward_count.setText(resultGame.gameSettings.quality.getReward() + "");
+            quality_reward_count.setText(resultGame.gameSettings.quality.getReward(resultGame.gameSettings) + "");
         }
-        else if(resultGame.gameSettings.quality.isMulct())
+        else if(resultGame.gameSettings.quality.isMulct(resultGame.gameSettings))
         {
             quality_mulct.setVisibility(View.VISIBLE);
-            quality_mulct_count.setText(resultGame.gameSettings.quality.getMulct() + "");
+            quality_mulct_count.setText(resultGame.gameSettings.quality.getMulct(resultGame.gameSettings) + "");
         }
-        if(resultGame.gameSettings.time_game.isReward())
+        if(resultGame.gameSettings.time_game.isReward(resultGame.gameSettings))
         {
             time_game_reward.setVisibility(View.VISIBLE);
-            time_game_reward_count.setText(resultGame.gameSettings.time_game.getReward() + "");
+            time_game_reward_count.setText(resultGame.gameSettings.time_game.getReward(resultGame.gameSettings) + "");
         }
-        else if(resultGame.gameSettings.time_game.isMulct())
+        else if(resultGame.gameSettings.time_game.isMulct(resultGame.gameSettings))
         {
             time_game_mulct.setVisibility(View.VISIBLE);
-            time_game_mulct_count.setText(resultGame.gameSettings.time_game.getMulct() + "");
+            time_game_mulct_count.setText(resultGame.gameSettings.time_game.getMulct(resultGame.gameSettings) + "");
         }
-        if(resultGame.gameSettings.time_offer.isReward())
+        if(resultGame.gameSettings.time_offer.isReward(resultGame.gameSettings))
         {
             time_offer_reward.setVisibility(View.VISIBLE);
-            time_offer_reward_count.setText(resultGame.gameSettings.time_offer.getReward() + "");
+            time_offer_reward_count.setText(resultGame.gameSettings.time_offer.getReward(resultGame.gameSettings) + "");
         }
-        else if(resultGame.gameSettings.time_offer.isMulct())
+        else if(resultGame.gameSettings.time_offer.isMulct(resultGame.gameSettings))
         {
             time_offer_mulct.setVisibility(View.VISIBLE);
-            time_offer_mulct_count.setText(resultGame.gameSettings.time_offer.getMulct() + "");
+            time_offer_mulct_count.setText(resultGame.gameSettings.time_offer.getMulct(resultGame.gameSettings) + "");
         }
     }
     private void initLose()
     {
         result_game_label.setText(R.string.you_lose);
         gold_earned_ll.setVisibility(View.GONE);
-        if(resultGame.gameSettings.quality.isEndGame())
+        if(resultGame.gameSettings.quality.isEndGame(resultGame.gameSettings))
         {
             quality_end_game.setVisibility(View.VISIBLE);
         }
-        else if(resultGame.gameSettings.time_game.isEndGame())
+        else if(resultGame.gameSettings.time_game.isEndGame(resultGame.gameSettings))
         {
             time_game_end_game.setVisibility(View.VISIBLE);
         }
-        else if(resultGame.gameSettings.time_offer.isEndGame())
+        else if(resultGame.gameSettings.time_offer.isEndGame(resultGame.gameSettings))
         {
             time_offer_end_game.setVisibility(View.VISIBLE);
         }

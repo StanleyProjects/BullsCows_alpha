@@ -122,12 +122,6 @@ public class SandBoxFragment
         int d = gameSettings.getDifficultLevel();
         Log.e(GameFragment.class.getCanonicalName(), "dif = " + d);
         easy_lable.setVisibility(View.GONE);
-        check_quality.setVisibility(View.GONE);
-        note_the_time.setVisibility(View.GONE);
-        note_the_time_offer.setVisibility(View.GONE);
-        with_mulct.setVisibility(View.GONE);
-        check_count_offers.setVisibility(View.GONE);
-        can_lose.setVisibility(View.GONE);
         switch (d)
         {
             case 5:
@@ -144,6 +138,20 @@ public class SandBoxFragment
                 break;
             case 0:
                 easy_lable.setVisibility(View.VISIBLE);
+        }
+        switch (d)
+        {
+            case 0:
+                check_quality.setVisibility(View.GONE);
+            case 1:
+                note_the_time.setVisibility(View.GONE);
+            case 2:
+                note_the_time_offer.setVisibility(View.GONE);
+                with_mulct.setVisibility(View.GONE);
+            case 3:
+                check_count_offers.setVisibility(View.GONE);
+            case 4:
+                can_lose.setVisibility(View.GONE);
         }
     }
 
