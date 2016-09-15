@@ -2,6 +2,7 @@ package stan.bulls.cows.core;
 
 import android.util.Log;
 
+import stan.bulls.cows.core.results.CountOfferGameResult;
 import stan.bulls.cows.core.results.QualityGameResult;
 import stan.bulls.cows.core.results.TimeGameResult;
 import stan.bulls.cows.core.results.TimeOfferGameResult;
@@ -11,6 +12,7 @@ public class GameSettings
     public QualityGameResult quality = new QualityGameResult();
     public TimeGameResult time_game = new TimeGameResult();
     public TimeOfferGameResult time_offer = new TimeOfferGameResult();
+    public CountOfferGameResult count_offers = new CountOfferGameResult();
     public int count;
     public int difficult;
 
@@ -42,6 +44,10 @@ public class GameSettings
         Log.e("time_game", "isMulct " + m);
         Log.e("time_game", "getMulct " + time_game.getMulct(this));
         Log.e("time_game", "getReward " + time_game.getReward(this));
+        Log.e("count_offers", "isReward " + count_offers.isReward(this));
+        Log.e("count_offers", "isMulct " + count_offers.isMulct(this));
+        Log.e("count_offers", "getMulct " + count_offers.getMulct(this));
+        Log.e("count_offers", "getReward " + count_offers.getReward(this));
     }
 
     public int getDifficultLevel()
@@ -50,15 +56,26 @@ public class GameSettings
     }
     public int getTimeGame()
     {
-        return (count-2)*(count-2)*(difficult/3)*10*1000;
+        int t = (count-2)*(count-2);
+        t *= (difficult/3);
+//        t *= 18 - count*3;
+        t *= 1000;
+//        t += (7-getDifficultLevel()) * 1000;
+        if(difficult > count)
+        {
+            t += difficult*1000;
+            t -= (count-3)*6*1000;
+        }
+        return t;
     }
     public int getTimeOffer()
     {
-        return (getTimeGame()/getCountOffers());
+        return getTimeGame()/getCountOffers()
+            + (getDifficultLevel()-2)*5000;
     }
     public int getCountOffers()
     {
 //        return 3 * (difficult/3) + ((count-2)+2)/2 + ((difficult/3)+2)/2;
-        return count + difficult;
+        return count + difficult - 2;
     }
 }

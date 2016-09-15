@@ -62,6 +62,8 @@ public class GameFragment
     private View time_offer_much;
     private View try_left;
     private TextView try_count;
+    private View count_offers_tries;
+    private View count_offers_much;
 
     private View offers_list_submessage_ll;
     private TextView offers_list_submessage;
@@ -123,6 +125,8 @@ public class GameFragment
         time_offer_secconds = v.findViewById(R.id.time_offer_secconds);
         time_offer_much = v.findViewById(R.id.time_offer_much);
         try_left = v.findViewById(R.id.try_left);
+        count_offers_tries = v.findViewById(R.id.count_offers_tries);
+        count_offers_much = v.findViewById(R.id.count_offers_much);
         time = (TextView) v.findViewById(R.id.time);
         try_count = (TextView) v.findViewById(R.id.try_count);
         progress = (CircleProgressView) v.findViewById(R.id.progress);
@@ -162,6 +166,8 @@ public class GameFragment
                 {
                     case 5:
                     case 4:
+                        gameController.updateCountOffers();
+                        try_count.setText((gameController.getSettings().getCountOffers() - data.size()) + "");
                         try_left.setVisibility(View.VISIBLE);
                     case 3:
                         time_offer.setVisibility(View.VISIBLE);
@@ -187,6 +193,16 @@ public class GameFragment
                 {
                     case 5:
                     case 4:
+                        if(gameController.canUpdateCountOffers())
+                        {
+                            gameController.updateCountOffers();
+                            try_count.setText((gameController.getSettings().getCountOffers() - data.size()) + "");
+                        }
+                        else
+                        {
+                            count_offers_tries.setVisibility(View.GONE);
+                            count_offers_tries.setVisibility(View.VISIBLE);
+                        }
                     case 3:
                         int r = settings.getTimeOffer() * settings.getDifficultLevel();
                         r -= settings.getTimeOffer() * ((settings.getDifficultLevel()-1)/2);
@@ -278,6 +294,8 @@ public class GameFragment
                 }
                 time_offer_secconds.setVisibility(View.GONE);
                 time_offer_much.setVisibility(View.GONE);
+                count_offers_tries.setVisibility(View.GONE);
+                count_offers_much.setVisibility(View.GONE);
                 listener.result(resultGame);
             }
         });
@@ -305,6 +323,7 @@ public class GameFragment
         time_game.setVisibility(View.GONE);
         time_offer.setVisibility(View.GONE);
         try_left.setVisibility(View.GONE);
+        count_offers_much.setVisibility(View.GONE);
     }
     private void initTimeGameView()
     {
@@ -349,13 +368,12 @@ public class GameFragment
         }
         time_offer_secconds.setVisibility(View.VISIBLE);
         time_offer_much.setVisibility(View.GONE);
-        time.setText(gameController.getSpendTimeOffer() + "");
-        timeOffer = new CountDownTimer(gameController.getSettings().getTimeOffer() - gameController.getSpendTimeOffer(), 500)
+        timeOffer = new CountDownTimer(gameController.getLeftTimeOffer(), 500)
         {
             @Override
             public void onTick(long l)
             {
-                time.setText(gameController.getSpendTimeOffer()/1000 + "");
+                time.setText(gameController.getLeftTimeOffer()/1000 + "");
             }
             @Override
             public void onFinish()

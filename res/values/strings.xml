@@ -34,4 +34,7 @@
     <string name="much">much</string>
     <string name="time_offer_reward">offer time reward</string>
     <string name="time_offer_mulct">offer time mulct</string>
+    <string name="count_reward">offers count reward</string>
+    <string name="count_mulct">offers count mulct</string>
+    <string name="count_end_game">too much offers</string>
 </resources>

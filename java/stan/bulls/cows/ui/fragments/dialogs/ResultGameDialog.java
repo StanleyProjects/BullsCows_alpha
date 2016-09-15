@@ -50,6 +50,12 @@ public class ResultGameDialog
     TextView time_offer_mulct_count;
     View time_offer_end_game;
 
+    View count_reward;
+    TextView count_reward_count;
+    View count_mulct;
+    TextView count_mulct_count;
+    View count_end_game;
+
     //___________________FIELDS
     private ResultGameDialogListener listener;
     private ResultGame resultGame;
@@ -100,6 +106,12 @@ public class ResultGameDialog
         time_offer_mulct = v.findViewById(R.id.time_offer_mulct);
         time_offer_mulct_count = (TextView) v.findViewById(R.id.time_offer_mulct_count);
         time_offer_end_game = v.findViewById(R.id.time_offer_end_game);
+
+        count_reward = v.findViewById(R.id.count_reward);
+        count_reward_count = (TextView) v.findViewById(R.id.count_reward_count);
+        count_mulct = v.findViewById(R.id.count_mulct);
+        count_mulct_count = (TextView) v.findViewById(R.id.count_mulct_count);
+        count_end_game = v.findViewById(R.id.count_end_game);
     }
     private void init()
     {
@@ -114,6 +126,10 @@ public class ResultGameDialog
         time_offer_reward.setVisibility(View.GONE);
         time_offer_mulct.setVisibility(View.GONE);
         time_offer_end_game.setVisibility(View.GONE);
+
+        count_reward.setVisibility(View.GONE);
+        count_mulct.setVisibility(View.GONE);
+        count_end_game.setVisibility(View.GONE);
 
         amount_offers.setText(resultGame.amount_offers + "");
         time_spend.setText((resultGame.time_spend / 1000) + "");
@@ -160,6 +176,16 @@ public class ResultGameDialog
             time_offer_mulct.setVisibility(View.VISIBLE);
             time_offer_mulct_count.setText(resultGame.gameSettings.time_offer.getMulct(resultGame.gameSettings) + "");
         }
+        if(resultGame.gameSettings.count_offers.isReward(resultGame.gameSettings))
+        {
+            count_reward.setVisibility(View.VISIBLE);
+            count_reward_count.setText(resultGame.gameSettings.count_offers.getReward(resultGame.gameSettings) + "");
+        }
+        else if(resultGame.gameSettings.count_offers.isMulct(resultGame.gameSettings))
+        {
+            count_mulct.setVisibility(View.VISIBLE);
+            count_mulct_count.setText(resultGame.gameSettings.count_offers.getMulct(resultGame.gameSettings) + "");
+        }
     }
     private void initLose()
     {
@@ -176,6 +202,10 @@ public class ResultGameDialog
         else if(resultGame.gameSettings.time_offer.isEndGame(resultGame.gameSettings))
         {
             time_offer_end_game.setVisibility(View.VISIBLE);
+        }
+        else if(resultGame.gameSettings.count_offers.isEndGame(resultGame.gameSettings))
+        {
+            count_end_game.setVisibility(View.VISIBLE);
         }
     }
 

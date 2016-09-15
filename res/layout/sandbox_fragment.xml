@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:alpha="0.15"
+        android:alpha="0.5"
         android:scaleType="centerCrop"
         android:src="@drawable/ulimateback"/>
 
@@ -158,29 +158,12 @@
             android:layout_height="1px"
             android:background="@color/colorPrimary"/>
     </LinearLayout>
-    <!--<TextView-->
-        <!--android:id="@+id/go"-->
-        <!--android:text="@string/go"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textAllCaps="true"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:gravity="center"-->
-        <!--android:background="@drawable/black_ripple"-->
-        <!--android:layout_width="96dp"-->
-        <!--android:layout_height="48dp"/>-->
-    <!--<Button-->
-        <!--android:id="@+id/go"-->
-        <!--android:text="@string/go"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:theme="@style/PrimaryButton"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"/>-->
     <LinearLayout
         android:id="@+id/game_settings_frame"
         android:layout_gravity="bottom"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="88dp">
+        android:layout_height="wrap_content">
         <View
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
@@ -188,7 +171,7 @@
         <FrameLayout
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="88dp">
             <LinearLayout
                 android:id="@+id/easy_lable"
                 android:layout_marginLeft="16dp"
@@ -213,11 +196,11 @@
             </LinearLayout>
             <LinearLayout
                 android:paddingLeft="4dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
@@ -283,6 +266,8 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
                     android:layout_weight="1"

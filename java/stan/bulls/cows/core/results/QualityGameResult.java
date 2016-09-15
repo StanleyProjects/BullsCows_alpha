@@ -59,6 +59,8 @@ public class QualityGameResult
     @Override
     public int getMulct(GameSettings settings)
     {
-        return settings.getDifficultLevel()*(settings.count-2)/2 + (settings.count-2)*(settings.difficult/3)/2;
+        return settings.getDifficultLevel()*(settings.count-2)/2
+                + (settings.count-2)*(settings.difficult/3)/2
+                + settings.getCountOffers()/(settings.difficult/3);
     }
 }

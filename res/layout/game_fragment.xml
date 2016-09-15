@@ -39,23 +39,6 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <!--<TextView-->
-        <!--android:id="@+id/add_offer"-->
-        <!--android:text="+"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textAllCaps="true"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:gravity="center"-->
-        <!--android:background="@drawable/black_ripple"-->
-        <!--android:layout_width="96dp"-->
-        <!--android:layout_height="48dp"/>-->
-    <!--<Button-->
-        <!--android:id="@+id/add_offer"-->
-        <!--android:text="+"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:theme="@style/PrimaryButton"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"/>-->
     <LinearLayout
         android:id="@+id/easy_lable"
         android:layout_marginLeft="16dp"
@@ -144,29 +127,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </FrameLayout>
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/try_left"
             android:layout_marginRight="48dp"
-            android:paddingLeft="4dp"
+            android:paddingLeft="8dp"
             android:layout_gravity="center_vertical|right"
-            android:gravity="center_vertical|left"
             android:background="@drawable/white_primary_border"
             android:layout_width="108dp"
             android:layout_height="32dp">
-            <TextView
-                android:text="@string/try_count"
-                android:textSize="14dp"
-                android:textColor="@color/black"
+            <LinearLayout
+                android:id="@+id/count_offers_tries"
+                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="@string/try_count"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/try_count"
+                    android:text="512"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
             <TextView
-                android:id="@+id/try_count"
-                android:text="512"
+                android:id="@+id/count_offers_much"
+                android:text="@string/much"
                 android:textSize="18dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
+        </FrameLayout>
     </FrameLayout>
     <Button
         android:id="@+id/add_offer"

@@ -76,6 +76,10 @@ public class GameController
         {
             return true;
         }
+        if(gameSettings.count_offers.isEndGame(gameSettings))
+        {
+            return true;
+        }
         return false;
     }
     private void endWinGame(boolean win)
@@ -108,6 +112,8 @@ public class GameController
         Log.e(GameController.class.getCanonicalName(), "calculateGoldEarned time_game " + gold);
         gold += calculateGoldEarnedFromResult(gameSettings.time_offer, gameSettings);
         Log.e(GameController.class.getCanonicalName(), "calculateGoldEarned time_offer " + gold);
+        gold += calculateGoldEarnedFromResult(gameSettings.count_offers, gameSettings);
+        Log.e(GameController.class.getCanonicalName(), "calculateGoldEarned count_offers " + gold);
         if(gold < 0)
         {
             gold = 0;
@@ -136,13 +142,25 @@ public class GameController
     {
         return System.currentTimeMillis() - date;
     }
-    public long getSpendTimeOffer()
+    private long getSpendTimeOffer()
     {
         return System.currentTimeMillis() - dateOffer;
+    }
+    public long getLeftTimeOffer()
+    {
+        return gameSettings.getTimeOffer() - (System.currentTimeMillis() - dateOffer);
     }
     public void updateTimeGame()
     {
         gameSettings.time_game.updateResult((int)(System.currentTimeMillis() - date));
+    }
+    public void updateCountOffers()
+    {
+        gameSettings.count_offers.updateResult(offersCount);
+    }
+    public boolean canUpdateCountOffers()
+    {
+        return offersCount < gameSettings.getCountOffers();
     }
 
     public void checkGameLose()
