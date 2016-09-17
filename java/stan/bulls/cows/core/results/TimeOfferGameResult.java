@@ -76,11 +76,13 @@ public class TimeOfferGameResult
     public void addGoodOffer(int i, GameSettings settings)
     {
         goodOffer++;
+        if(settings.getCountOffers() - i < 1)
+        {
+            reward ++;
+            return;
+        }
         int r = settings.getDifficultLevel()*(settings.count-2);
         r /= settings.getCountOffers() - i;
-//        r /= settings.difficult/3;
-//        r += + settings.getCountOffers();
-//        r += settings.difficult/3 - 1;
         reward += r;
     }
     public void addNeutralOffer(int i, GameSettings settings)
@@ -90,12 +92,9 @@ public class TimeOfferGameResult
     public void addBadOffer(int i, GameSettings settings)
     {
         badOffer++;
-        reward -= settings.getDifficultLevel();
-        reward *= (settings.count-2)*(settings.difficult/3);
-        if((settings.getCountOffers() - (settings.count-2) - (i/2)) > 0)
-        {
-            reward /= (settings.getCountOffers() - (settings.count-2) - (i/2));
-        }
-        reward += settings.getCountOffers();
+        int r = settings.getDifficultLevel();
+        r *= (settings.count-2)*(settings.difficult/3);
+        r += settings.getCountOffers();
+        reward -= r;
     }
 }

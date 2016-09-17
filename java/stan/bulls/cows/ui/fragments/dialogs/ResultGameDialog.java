@@ -145,6 +145,11 @@ public class ResultGameDialog
     private void initWin()
     {
         result_game_label.setText(R.string.congratulations);
+        if(resultGame.gameSettings.getDifficultLevel() == 0)
+        {
+            gold_earned_ll.setVisibility(View.GONE);
+            return;
+        }
         gold_earned.setText(resultGame.gold_earned + "");
         if(resultGame.gameSettings.quality.isReward(resultGame.gameSettings))
         {

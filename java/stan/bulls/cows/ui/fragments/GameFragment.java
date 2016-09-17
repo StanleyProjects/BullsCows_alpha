@@ -201,7 +201,7 @@ public class GameFragment
                         else
                         {
                             count_offers_tries.setVisibility(View.GONE);
-                            count_offers_tries.setVisibility(View.VISIBLE);
+                            count_offers_much.setVisibility(View.VISIBLE);
                         }
                     case 3:
                         int r = settings.getTimeOffer() * settings.getDifficultLevel();

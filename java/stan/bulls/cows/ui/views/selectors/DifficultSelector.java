@@ -103,7 +103,7 @@ public class DifficultSelector
             hard.setBackground(getResources().getDrawable(R.drawable.red_ripple));
         }
         easy_text.setTextColor(getResources().getColor(R.color.green));
-        medium_text.setTextColor(getResources().getColor(R.color.yellow));
+        medium_text.setTextColor(getResources().getColor(R.color.gold));
         hard_text.setTextColor(getResources().getColor(R.color.red));
     }
 
