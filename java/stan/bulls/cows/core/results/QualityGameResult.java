@@ -61,6 +61,7 @@ public class QualityGameResult
     {
         return settings.getDifficultLevel()*(settings.count-2)/2
                 + (settings.count-2)*(settings.difficult/3)/2
-                + settings.getCountOffers()/(settings.difficult/3);
+                + settings.getCountOffers()/(settings.difficult/3)
+                + settings.getDifficultLevel();
     }
 }

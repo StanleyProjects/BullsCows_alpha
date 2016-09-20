@@ -93,7 +93,7 @@ public class TimeOfferGameResult
     {
         badOffer++;
         int r = settings.getDifficultLevel();
-        r *= (settings.count-2)*(settings.difficult/3);
+        //r *= (settings.count-2)*(settings.difficult/3);
         r += settings.getCountOffers();
         reward -= r;
     }

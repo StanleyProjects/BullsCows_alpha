@@ -56,6 +56,8 @@ public class ResultGameDialog
     TextView count_mulct_count;
     View count_end_game;
 
+    View end_game;
+
     //___________________FIELDS
     private ResultGameDialogListener listener;
     private ResultGame resultGame;
@@ -112,6 +114,8 @@ public class ResultGameDialog
         count_mulct = v.findViewById(R.id.count_mulct);
         count_mulct_count = (TextView) v.findViewById(R.id.count_mulct_count);
         count_end_game = v.findViewById(R.id.count_end_game);
+
+        end_game = v.findViewById(R.id.end_game);
     }
     private void init()
     {
@@ -130,6 +134,8 @@ public class ResultGameDialog
         count_reward.setVisibility(View.GONE);
         count_mulct.setVisibility(View.GONE);
         count_end_game.setVisibility(View.GONE);
+
+        end_game.setVisibility(View.GONE);
 
         amount_offers.setText(resultGame.amount_offers + "");
         time_spend.setText((resultGame.time_spend / 1000) + "");
@@ -196,6 +202,7 @@ public class ResultGameDialog
     {
         result_game_label.setText(R.string.you_lose);
         gold_earned_ll.setVisibility(View.GONE);
+        end_game.setVisibility(View.VISIBLE);
         if(resultGame.gameSettings.quality.isEndGame(resultGame.gameSettings))
         {
             quality_end_game.setVisibility(View.VISIBLE);

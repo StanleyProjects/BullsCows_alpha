@@ -41,7 +41,7 @@ public class GameSettings
         t *= getDifficultLevel();
         t += getDifficultLevel();
         t += 3*(5-getDifficultLevel());
-        t += getDifficultLevel()*3;
+        t += getDifficultLevel()*getDifficultLevel();
         t *= 1000;
         return t;
     }
