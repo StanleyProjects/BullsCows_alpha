@@ -87,6 +87,11 @@ public class DifficultSelector
         easy_text.setTextColor(getResources().getColor(R.color.white));
     }
 
+    public void showHard(boolean show)
+    {
+        hard.setVisibility(show ? VISIBLE : GONE);
+    }
+
     private void clearAll()
     {
         int sdk = android.os.Build.VERSION.SDK_INT;

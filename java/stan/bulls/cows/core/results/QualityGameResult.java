@@ -53,7 +53,7 @@ public class QualityGameResult
     @Override
     public int getReward(GameSettings settings)
     {
-        return settings.getDifficultLevel()*(settings.count-2);
+        return settings.getDifficultLevel()*settings.getDifficultLevel();
     }
 
     @Override

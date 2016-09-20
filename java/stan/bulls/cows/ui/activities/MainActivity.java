@@ -45,6 +45,10 @@ public class MainActivity
         {
             PreferenceHelper.addGold(this, 1);
         }
+        if(PreferenceHelper.getLevel(this) == -1)
+        {
+            PreferenceHelper.levelUp(this);
+        }
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.main_frame, sandBoxFragment)

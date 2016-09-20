@@ -37,4 +37,25 @@
     <string name="count_reward">offers count reward</string>
     <string name="count_mulct">offers count mulct</string>
     <string name="count_end_game">too much offers</string>
+
+    <string name="for_coins">Buy next level for
+        <![CDATA[
+        <font color=\'#FFC107\'>%s</font>
+        ]]>
+        coins</string>
+    <string name="current_level">current level:</string>
+    <string name="level_name_bronze">bronze</string>
+    <string name="level_name_zero">zero</string>
+    <string name="level_name_silver">silver</string>
+    <string name="level_name_diamond">diamond</string>
+    <string name="level_name_master">master</string>
+    <string name="level_name_godlike">godlike</string>
+    <string name="need_more_gold">Need more gold</string>
+    <string name="level_up">Level up!</string>
+    <string name="your_level_now">Your level now:</string>
+    <string name="good_luck">Good luck.</string>
+    <string name="godlike_level_up_description">You godlike. Enjoy the victory.</string>
+    <string name="bronze_level_up_description">Now you can change count elements of combination. Good luck.</string>
+    <string name="diamond_level_up_description">Now you can choose hard difficult. Good luck.</string>
+    <string name="master_level_up_description">You open all existing features. But you still do not godlike. Good luck.</string>
 </resources>

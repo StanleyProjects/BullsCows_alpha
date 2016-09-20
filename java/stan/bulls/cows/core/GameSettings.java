@@ -39,8 +39,8 @@ public class GameSettings
     {
         int t = getDifficultLevel();
         t *= getDifficultLevel();
-        t += getDifficultLevel();
-        t += 3*(5-getDifficultLevel());
+        t += 3*getDifficultLevel();
+//        t += 3*(5-getDifficultLevel());
         t += getDifficultLevel()*getDifficultLevel();
         t *= 1000;
         return t;

@@ -81,7 +81,7 @@ public class TimeOfferGameResult
             reward ++;
             return;
         }
-        int r = settings.getDifficultLevel()*(settings.count-2);
+        int r = settings.getDifficultLevel()*settings.getDifficultLevel();
         r /= settings.getCountOffers() - i;
         reward += r;
     }

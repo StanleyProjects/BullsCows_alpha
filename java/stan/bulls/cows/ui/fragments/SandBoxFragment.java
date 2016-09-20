@@ -2,18 +2,24 @@ package stan.bulls.cows.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.Difficults;
 import stan.bulls.cows.core.GameSettings;
+import stan.bulls.cows.core.LevelController;
+import stan.bulls.cows.core.Levels;
 import stan.bulls.cows.helpers.PreferenceHelper;
+import stan.bulls.cows.helpers.ui.LevelsNamesHelper;
 import stan.bulls.cows.ui.activities.GameActivity;
+import stan.bulls.cows.ui.fragments.dialogs.LevelUpDialog;
 import stan.bulls.cows.ui.views.selectors.DifficultSelector;
 
 public class SandBoxFragment
@@ -21,6 +27,10 @@ public class SandBoxFragment
 {
     //___________________VIEWS
     private TextView gold;
+    private TextView for_coins;
+    private TextView level_name;
+    private View buy_next_level_container;
+    private View buy_next_level;
     private TextView game_count_value;
     private SeekBar game_count_seek;
     private DifficultSelector difficult;
@@ -34,8 +44,6 @@ public class SandBoxFragment
     private View can_lose;
 
     //___________________FIELDS
-    private int countMax = 6;
-    private int countMin = 3;
     private GameSettings gameSettings;
 
     @Override
@@ -49,6 +57,18 @@ public class SandBoxFragment
     private void initViews(View v)
     {
         gold = (TextView)v.findViewById(R.id.gold);
+        for_coins = (TextView)v.findViewById(R.id.for_coins);
+        level_name = (TextView)v.findViewById(R.id.level_name);
+        buy_next_level_container = v.findViewById(R.id.buy_next_level_container);
+        buy_next_level = v.findViewById(R.id.buy_next_level);
+        buy_next_level.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                buyNextLevel();
+            }
+        });
         difficult = (DifficultSelector)v.findViewById(R.id.difficult);
         game_max_amount_text = (TextView)v.findViewById(R.id.game_max_amount_text);
         game_count_value = (TextView) v.findViewById(R.id.game_count_value);
@@ -61,6 +81,28 @@ public class SandBoxFragment
                 startGame();
             }
         });
+        v.findViewById(R.id.test).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                PreferenceHelper.addGold(getActivity(), 50);
+                refreshGold();
+            }
+        });
+        v.findViewById(R.id.test).setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                PreferenceHelper.spendGold(getActivity(), PreferenceHelper.getGold(getActivity()));
+                PreferenceHelper.resetLevels(getActivity());
+                gameSettings.count = Difficults.MIN_COUNT;
+                gameSettings.difficult = Difficults.DIFFICULT_EASY;
+                refreshGold();
+                return false;
+            }
+        });
         easy_lable = v.findViewById(R.id.easy_lable);
         check_quality = v.findViewById(R.id.check_quality);
         note_the_time = v.findViewById(R.id.note_the_time);
@@ -69,6 +111,7 @@ public class SandBoxFragment
         check_count_offers = v.findViewById(R.id.check_count_offers);
         can_lose = v.findViewById(R.id.can_lose);
     }
+
     private void init()
     {
         difficult.setListener(new DifficultSelector.DifficultListener()
@@ -80,13 +123,13 @@ public class SandBoxFragment
                 updateFromGameSettings();
             }
         });
-        game_count_seek.setMax(countMax-countMin);
+//        game_count_seek.setMax(countMax-countMin);
         game_count_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b)
             {
-                setCount(i+countMin);
+                setCount(i+Difficults.MIN_COUNT);
             }
 
             @Override
@@ -101,14 +144,14 @@ public class SandBoxFragment
 
             }
         });
-        gameSettings = new GameSettings(countMin, Difficults.DIFFICULT_EASY);
+        gameSettings = new GameSettings(Difficults.MIN_COUNT, Difficults.DIFFICULT_EASY);
         refreshGold();
         updateFromGameSettings();
     }
 
     private void setCount(int c)
     {
-        if(c >= countMin && c <= countMax)
+        if(c >= Difficults.MIN_COUNT)
         {
             gameSettings.count = c;
         }
@@ -157,7 +200,63 @@ public class SandBoxFragment
 
     public void refreshGold()
     {
-        gold.setText(PreferenceHelper.getGold(getActivity()) + "");
+        int g = PreferenceHelper.getGold(getActivity());
+        if(g < 999999999)
+        {
+            gold.setText(g + "");
+        }
+        else
+        {
+            gold.setText(R.string.much);
+        }
+        int lvl = PreferenceHelper.getLevel(getActivity());
+        level_name.setText(LevelsNamesHelper.getLevelName(lvl));
+        int nextlvl = LevelController.getNextLevel(lvl);
+        difficult.showHard(false);
+        game_count_seek.setVisibility(View.VISIBLE);
+        switch(lvl)
+        {
+            case Levels.godlike:
+                buy_next_level_container.setVisibility(View.INVISIBLE);
+            case Levels.master:
+                game_count_seek.setMax(Difficults.MAX_COUNT_MASTER - Difficults.MIN_COUNT);
+                break;
+            case Levels.diamond:
+            case Levels.silver:
+                game_count_seek.setMax(Difficults.MAX_COUNT_SILVER - Difficults.MIN_COUNT);
+                break;
+            case Levels.bronze:
+                game_count_seek.setMax(Difficults.MAX_COUNT_BRONZE - Difficults.MIN_COUNT);
+                break;
+            case Levels.zero:
+                game_count_seek.setVisibility(View.GONE);
+        }
+        switch(lvl)
+        {
+            case Levels.godlike:
+            case Levels.master:
+            case Levels.diamond:
+                difficult.showHard(true);
+        }
+        String text = getActivity().getResources().getString(R.string.for_coins, LevelController.getLevelPrice(nextlvl));
+        for_coins.setText(Html.fromHtml(text));
+    }
+
+    private void buyNextLevel()
+    {
+        int g = PreferenceHelper.getGold(getActivity());
+        int lvl = PreferenceHelper.getLevel(getActivity());
+        int nextlvl = LevelController.getNextLevel(lvl);
+        int p = LevelController.getLevelPrice(nextlvl);
+        if(p > g)
+        {
+            Toast.makeText(getActivity(), R.string.need_more_gold, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        PreferenceHelper.spendGold(getActivity(), p);
+        PreferenceHelper.levelUp(getActivity());
+        refreshGold();
+        LevelUpDialog.newInstance().show(getActivity().getSupportFragmentManager(), LevelUpDialog.class.getCanonicalName());
     }
 
     private void startGame()

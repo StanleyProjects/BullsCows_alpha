@@ -45,7 +45,7 @@ public class TimeGameResult
     @Override
     public int getReward(GameSettings settings)
     {
-        return settings.getDifficultLevel()*(settings.count-1);
+        return settings.getDifficultLevel()*settings.getDifficultLevel();
     }
 
     @Override
