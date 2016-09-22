@@ -20,6 +20,7 @@ import stan.bulls.cows.helpers.PreferenceHelper;
 import stan.bulls.cows.helpers.ui.LevelsNamesHelper;
 import stan.bulls.cows.ui.activities.GameActivity;
 import stan.bulls.cows.ui.fragments.dialogs.LevelUpDialog;
+import stan.bulls.cows.ui.views.selectors.DifficultPrimarySelector;
 import stan.bulls.cows.ui.views.selectors.DifficultSelector;
 
 public class SandBoxFragment
@@ -27,8 +28,10 @@ public class SandBoxFragment
 {
     //___________________VIEWS
     private TextView game_count_value;
+    private View game_count_frame;
     private SeekBar game_count_seek;
     private DifficultSelector difficult;
+//    private DifficultPrimarySelector difficult;
     private TextView game_max_amount_text;
     private View easy_lable;
     private View check_quality;
@@ -52,8 +55,10 @@ public class SandBoxFragment
     private void initViews(View v)
     {
         difficult = (DifficultSelector)v.findViewById(R.id.difficult);
+//        difficult = (DifficultPrimarySelector)v.findViewById(R.id.difficult);
         game_max_amount_text = (TextView)v.findViewById(R.id.game_max_amount_text);
         game_count_value = (TextView) v.findViewById(R.id.game_count_value);
+        game_count_frame = v.findViewById(R.id.game_count_frame);
         game_count_seek = (SeekBar) v.findViewById(R.id.game_count_seek);
         v.findViewById(R.id.go).setOnClickListener(new View.OnClickListener()
         {
@@ -75,6 +80,7 @@ public class SandBoxFragment
     private void init()
     {
         difficult.setListener(new DifficultSelector.DifficultListener()
+//        difficult.setListener(new DifficultPrimarySelector.DifficultListener()
         {
             @Override
             public void setDifficult(int dif)
@@ -165,7 +171,8 @@ public class SandBoxFragment
     {
         int lvl = PreferenceHelper.getLevel(getActivity());
         difficult.showHard(false);
-        game_count_seek.setVisibility(View.VISIBLE);
+        game_count_frame.setVisibility(View.VISIBLE);
+        gameSettings.difficult = Difficults.DIFFICULT_MEDIUM;
         switch(lvl)
         {
             case Levels.master:
@@ -179,7 +186,8 @@ public class SandBoxFragment
                 game_count_seek.setMax(Difficults.MAX_COUNT_BRONZE - Difficults.MIN_COUNT);
                 break;
             case Levels.zero:
-                game_count_seek.setVisibility(View.GONE);
+                game_count_seek.setMax(Difficults.MIN_COUNT);
+                game_count_frame.setVisibility(View.GONE);
         }
         switch(lvl)
         {
@@ -188,6 +196,10 @@ public class SandBoxFragment
             case Levels.diamond:
                 difficult.showHard(true);
         }
+        gameSettings.count = Difficults.MIN_COUNT;
+        gameSettings.difficult = Difficults.DIFFICULT_EASY;
+        game_count_seek.setProgress(0);
+        difficult.reset();
     }
 
     private void startGame()

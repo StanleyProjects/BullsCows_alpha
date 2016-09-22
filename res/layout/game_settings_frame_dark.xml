@@ -3,10 +3,6 @@
              android:background="@color/greydark"
              android:layout_width="match_parent"
              android:layout_height="88dp">
-    <View
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="1px"/>
     <LinearLayout
         android:id="@+id/easy_lable"
         android:layout_marginLeft="16dp"

@@ -22,7 +22,7 @@
                 android:id="@+id/menu"
                 android:background="@drawable/primary_ripple"
                 android:clickable="true"
-                android:src="@drawable/ic_menu_white_36dp"
+                android:src="@drawable/ic_menu_white_24dp"
                 android:tint="@color/colorPrimary"
                 android:scaleType="center"
                 android:layout_width="48dp"

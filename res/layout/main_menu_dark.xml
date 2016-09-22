@@ -77,7 +77,7 @@
             </LinearLayout>
             <FrameLayout
                 android:id="@+id/buy_next_level_container"
-                android:background="@color/gold_trans"
+                android:background="@color/white_trans"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
                 <View
@@ -181,38 +181,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/white"/>
-            <LinearLayout
-                android:id="@+id/kill_progress"
-                android:background="@drawable/white_ripple"
-                android:clickable="true"
-                android:gravity="center_vertical"
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1px"-->
+                <!--android:background="@color/black"/>-->
+            <FrameLayout
+                android:background="@color/black_trans"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
-                <ImageView
-                    android:src="@drawable/ic_scull36"
-                    android:scaleType="fitCenter"
-                    android:tint="@color/white"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_width="24dp"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:text="@string/kill_progress"
-                    android:textSize="18dp"
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/kill_progress"
+                    android:background="@drawable/white_ripple"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+                    <ImageView
+                        android:src="@drawable/ic_scull36"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/greydark"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:text="@string/kill_progress"
+                        android:textSize="18dp"
+                        android:textColor="@color/greydark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </FrameLayout>
+            <Button
+                android:id="@+id/test"
+                android:visibility="visible"
+                android:text="test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </FrameLayout>
-    <Button
-        android:id="@+id/test"
-        android:visibility="gone"
-        android:text="test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

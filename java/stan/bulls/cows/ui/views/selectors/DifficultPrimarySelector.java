@@ -10,7 +10,7 @@ import android.widget.TextView;
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.Difficults;
 
-public class DifficultSelector
+public class DifficultPrimarySelector
         extends LinearLayout
         implements Difficults
 {
@@ -21,7 +21,7 @@ public class DifficultSelector
     private TextView medium_text;
     private TextView hard_text;
 
-    private final View.OnClickListener clickListener = new OnClickListener()
+    private final OnClickListener clickListener = new OnClickListener()
     {
         @Override
         public void onClick(View view)
@@ -37,7 +37,7 @@ public class DifficultSelector
                     {
                         difficult = DIFFICULT_EASY;
                         clearAll();
-                        easy.setBackgroundColor(getResources().getColor(R.color.green));
+                        easy.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         easy_text.setTextColor(getResources().getColor(R.color.white));
                         listener.setDifficult(DIFFICULT_EASY);
                     }
@@ -47,7 +47,7 @@ public class DifficultSelector
                     {
                         difficult = DIFFICULT_MEDIUM;
                         clearAll();
-                        medium.setBackgroundColor(getResources().getColor(R.color.gold));
+                        medium.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         medium_text.setTextColor(getResources().getColor(R.color.white));
                         listener.setDifficult(DIFFICULT_MEDIUM);
                     }
@@ -57,7 +57,7 @@ public class DifficultSelector
                     {
                         difficult = DIFFICULT_HARD;
                         clearAll();
-                        hard.setBackgroundColor(getResources().getColor(R.color.red));
+                        hard.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         hard_text.setTextColor(getResources().getColor(R.color.white));
                         listener.setDifficult(DIFFICULT_HARD);
                     }
@@ -68,7 +68,7 @@ public class DifficultSelector
     private DifficultListener listener;
     private int difficult;
 
-    public DifficultSelector(Context context, AttributeSet attrs)
+    public DifficultPrimarySelector(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.difficult_selector, this);
@@ -81,13 +81,9 @@ public class DifficultSelector
         easy.setOnClickListener(clickListener);
         medium.setOnClickListener(clickListener);
         hard.setOnClickListener(clickListener);
-        reset();
-    }
-    public void reset()
-    {
         difficult = DIFFICULT_EASY;
         clearAll();
-        easy.setBackgroundColor(getResources().getColor(R.color.green));
+        easy.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         easy_text.setTextColor(getResources().getColor(R.color.white));
     }
 
@@ -98,12 +94,22 @@ public class DifficultSelector
 
     private void clearAll()
     {
-        easy.setBackgroundDrawable(getResources().getDrawable(R.drawable.green_ripple));
-        medium.setBackgroundDrawable(getResources().getDrawable(R.drawable.gold_ripple));
-        hard.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_ripple));
-        easy_text.setTextColor(getResources().getColor(R.color.black_trans));
-        medium_text.setTextColor(getResources().getColor(R.color.black_trans));
-        hard_text.setTextColor(getResources().getColor(R.color.black_trans));
+        int sdk = android.os.Build.VERSION.SDK_INT;
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN)
+        {
+            easy.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_ripple));
+            medium.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_ripple));
+            hard.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_ripple));
+        }
+        else
+        {
+            easy.setBackground(getResources().getDrawable(R.drawable.white_ripple));
+            medium.setBackground(getResources().getDrawable(R.drawable.white_ripple));
+            hard.setBackground(getResources().getDrawable(R.drawable.white_ripple));
+        }
+        easy_text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        medium_text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        hard_text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
     public void setListener(DifficultListener l)

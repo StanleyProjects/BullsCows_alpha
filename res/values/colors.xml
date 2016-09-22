@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">@color/greydark</color>
     <color name="colorAccent">@color/purple</color>
 
+    <!--<color name="purpledark">#7B1FA2</color>-->
     <color name="purpledark">#4A148C</color>
     <color name="purplelight">#9575CD</color>
+    <!--<color name="purple">#7B1FA2</color>-->
     <color name="purple">#9C27B0</color>
     <color name="purple_trans">#809C27B0</color>
 
@@ -15,6 +17,7 @@
     <color name="greydark">#212121</color>
     <color name="black">#000000</color>
     <color name="black_trans">#80000000</color>
+    <color name="greenaccent">#68efad</color>
 
     <color name="gold">#FFC107</color>
     <color name="red">#F44336</color>

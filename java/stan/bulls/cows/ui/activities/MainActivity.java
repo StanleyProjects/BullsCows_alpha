@@ -1,6 +1,7 @@
 package stan.bulls.cows.ui.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import stan.bulls.cows.BuildConfig;
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.GameSettings;
 import stan.bulls.cows.core.LevelController;
@@ -32,6 +34,38 @@ public class MainActivity
 
     //___________________FRAGMENTS
     private final SandBoxFragment sandBoxFragment = new SandBoxFragment();
+
+    //___________________FIELDS
+    private View.OnClickListener clickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            switch(v.getId())
+            {
+                case R.id.test:
+                    test();
+                    break;
+                case R.id.menu:
+                    menu();
+                    break;
+                case R.id.rate_app:
+                    rateApp();
+                    break;
+                case R.id.share_progress:
+                    shareProgress();
+                    break;
+                case R.id.get_help:
+                    getHelp();
+                    break;
+                case R.id.kill_progress:
+                    killProgress();
+                    break;
+            }
+        }
+    };
+
+    private String help_url;
 
     @Override
     protected void onActivityResult(int request, int result, Intent intent)
@@ -75,38 +109,16 @@ public class MainActivity
                 buyNextLevel();
             }
         });
-        findViewById(R.id.test).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                PreferenceHelper.addGold(MainActivity.this, 50);
-                refreshGold();
-            }
-        });
-        findViewById(R.id.test).setOnLongClickListener(new View.OnLongClickListener()
-        {
-            @Override
-            public boolean onLongClick(View view)
-            {
-                PreferenceHelper.spendGold(MainActivity.this, PreferenceHelper.getGold(MainActivity.this));
-                PreferenceHelper.resetLevels(MainActivity.this);
-                refreshGold();
-                sandBoxFragment.updateFromLevel();
-                return true;
-            }
-        });
-        findViewById(R.id.menu).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                main_drawer.openDrawer(GravityCompat.START);
-            }
-        });
+        findViewById(R.id.test).setOnClickListener(clickListener);
+        findViewById(R.id.menu).setOnClickListener(clickListener);
+        findViewById(R.id.rate_app).setOnClickListener(clickListener);
+        findViewById(R.id.share_progress).setOnClickListener(clickListener);
+        findViewById(R.id.get_help).setOnClickListener(clickListener);
+        findViewById(R.id.kill_progress).setOnClickListener(clickListener);
     }
     private void init()
     {
+        help_url = getResources().getString(R.string.help_url);
         if(PreferenceHelper.getGold(this) == -1)
         {
             PreferenceHelper.addGold(this, 1);
@@ -161,6 +173,39 @@ public class MainActivity
         PreferenceHelper.levelUp(this);
         refreshGold();
         LevelUpDialog.newInstance().show(this.getSupportFragmentManager(), LevelUpDialog.class.getCanonicalName());
+        sandBoxFragment.updateFromLevel();
+    }
+
+    private void test()
+    {
+        PreferenceHelper.addGold(MainActivity.this, 50);
+        refreshGold();
+    }
+    private void menu()
+    {
+        main_drawer.openDrawer(GravityCompat.START);
+    }
+    private void rateApp()
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID)));
+    }
+    private void shareProgress()
+    {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+    private void getHelp()
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(help_url)));
+    }
+    private void killProgress()
+    {
+        PreferenceHelper.spendGold(MainActivity.this, PreferenceHelper.getGold(MainActivity.this));
+        PreferenceHelper.resetLevels(MainActivity.this);
+        refreshGold();
         sandBoxFragment.updateFromLevel();
     }
 }

@@ -31,4 +31,9 @@
         <item name="android:background">@drawable/primary_black_ripple</item>
     </style>
 
+    <style name="CountSeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:secondaryProgress">@color/red</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
 </resources>

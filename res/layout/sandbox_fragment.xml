@@ -3,6 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
     <include layout="@layout/settings"/>
+    <!--<include layout="@layout/settings_primary"/>-->
     <include layout="@layout/game_settings_frame_dark"
              android:layout_gravity="bottom"
              android:layout_width="match_parent"

@@ -4,18 +4,13 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="vertical">
-    <!--<View-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="2dp"/>-->
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginLeft="24dp"
         android:gravity="center"
         android:text="@string/add_offer_dialog_label"
-        android:textColor="@color/purple"
+        android:textColor="@color/colorPrimary"
         android:textSize="16dp"/>
 
     <LinearLayout
@@ -38,7 +33,7 @@
             android:id="@+id/refresh"
             android:background="@drawable/black_ripple"
             android:src="@drawable/ic_sync_white_24dp"
-            android:tint="@color/colorAccent"
+            android:tint="@color/colorPrimary"
             android:scaleType="center"
             android:layout_width="48dp"
             android:layout_height="match_parent"/>
@@ -50,11 +45,11 @@
     <TextView
         android:id="@+id/add_offer"
         android:text="@string/ok"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/white"
         android:textAllCaps="true"
         android:layout_gravity="right"
         android:gravity="center"
-        android:background="@drawable/primary_ripple"
+        android:background="@drawable/white_ripple"
         android:layout_width="96dp"
         android:layout_height="48dp"/>
 
