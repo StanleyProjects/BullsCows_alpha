@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">BullsCows</string>
-    <string name="offer_count">Count elements of combination</string>
-    <string name="combination_element_can_be">Combination element can be</string>
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
@@ -43,7 +41,7 @@
         <font color=\'#FFC107\'>%s</font>
         ]]>
         coins</string>
-    <string name="current_level">current level:</string>
+    <string name="current_level">Current level:</string>
     <string name="level_name_bronze">bronze</string>
     <string name="level_name_zero">zero</string>
     <string name="level_name_silver">silver</string>
@@ -58,4 +56,21 @@
     <string name="bronze_level_up_description">Now you can change count elements of combination. Good luck.</string>
     <string name="diamond_level_up_description">Now you can choose hard difficult. Good luck.</string>
     <string name="master_level_up_description">You open all existing features. But you still do not godlike. Good luck.</string>
+    <string name="info">Information</string>
+    <string name="count_elements">Count elements of combination:
+        <![CDATA[<big>
+        <font color=\'#9C27B0\'>%s</font>
+        </big>]]></string>
+    <string name="combination_element_can_be">Combination element can be\nfrom
+        <![CDATA[<big>
+        <font color=\'#9C27B0\'>0</font>
+        </big>]]>
+     to
+        <![CDATA[<big>
+        <font color=\'#9C27B0\'>%s</font>
+        </big>]]></string>
+    <string name="rate">Rate this game</string>
+    <string name="share_progress">Share your progress</string>
+    <string name="help">Get help</string>
+    <string name="kill_progress">Kill your progress</string>
 </resources>

@@ -34,6 +34,6 @@ public class LevelController
             case Levels.master:
                 return Levels.godlike;
         }
-        return -1;
+        return Levels.zero;
     }
 }

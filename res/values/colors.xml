@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/purple</color>
-    <color name="colorPrimaryDark">@color/purpledark</color>
+    <color name="colorPrimaryDark">@color/greydark</color>
     <color name="colorAccent">@color/purple</color>
 
     <color name="purpledark">#4A148C</color>
@@ -11,6 +11,8 @@
 
     <color name="white">#ffffff</color>
     <color name="white_trans">#80ffffff</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="greydark">#212121</color>
     <color name="black">#000000</color>
     <color name="black_trans">#80000000</color>
 

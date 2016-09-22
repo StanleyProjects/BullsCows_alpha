@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import stan.bulls.cows.R;
+import stan.bulls.cows.core.GameSettings;
 import stan.bulls.cows.core.ResultGame;
 import stan.bulls.cows.helpers.PreferenceHelper;
 import stan.bulls.cows.marks.GameMark;
@@ -58,7 +59,10 @@ public class GameActivity
                         if(result.win)
                         {
                             setResult(RESULT_WIN);
-                            PreferenceHelper.addGold(GameActivity.this, result.gold_earned);
+                            if(PreferenceHelper.getGold(GameActivity.this) < GameSettings.MAX_GOLD_COINS)
+                            {
+                                PreferenceHelper.addGold(GameActivity.this, result.gold_earned);
+                            }
                         }
                         else
                         {

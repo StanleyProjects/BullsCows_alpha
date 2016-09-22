@@ -9,6 +9,8 @@ import stan.bulls.cows.core.results.TimeOfferGameResult;
 
 public class GameSettings
 {
+    static public final int MAX_GOLD_COINS = 999_999_999;
+
     public QualityGameResult quality = new QualityGameResult();
     public TimeGameResult time_game = new TimeGameResult();
     public TimeOfferGameResult time_offer = new TimeOfferGameResult();

@@ -107,9 +107,9 @@ public class DifficultSelector
             medium.setBackground(getResources().getDrawable(R.drawable.gold_ripple));
             hard.setBackground(getResources().getDrawable(R.drawable.red_ripple));
         }
-        easy_text.setTextColor(getResources().getColor(R.color.green));
-        medium_text.setTextColor(getResources().getColor(R.color.gold));
-        hard_text.setTextColor(getResources().getColor(R.color.red));
+        easy_text.setTextColor(getResources().getColor(R.color.green_trans));
+        medium_text.setTextColor(getResources().getColor(R.color.gold_trans));
+        hard_text.setTextColor(getResources().getColor(R.color.red_trans));
     }
 
     public void setListener(DifficultListener l)

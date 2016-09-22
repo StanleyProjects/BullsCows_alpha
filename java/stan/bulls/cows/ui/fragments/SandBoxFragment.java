@@ -26,11 +26,6 @@ public class SandBoxFragment
         extends Fragment
 {
     //___________________VIEWS
-    private TextView gold;
-    private TextView for_coins;
-    private TextView level_name;
-    private View buy_next_level_container;
-    private View buy_next_level;
     private TextView game_count_value;
     private SeekBar game_count_seek;
     private DifficultSelector difficult;
@@ -56,19 +51,6 @@ public class SandBoxFragment
     }
     private void initViews(View v)
     {
-        gold = (TextView)v.findViewById(R.id.gold);
-        for_coins = (TextView)v.findViewById(R.id.for_coins);
-        level_name = (TextView)v.findViewById(R.id.level_name);
-        buy_next_level_container = v.findViewById(R.id.buy_next_level_container);
-        buy_next_level = v.findViewById(R.id.buy_next_level);
-        buy_next_level.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                buyNextLevel();
-            }
-        });
         difficult = (DifficultSelector)v.findViewById(R.id.difficult);
         game_max_amount_text = (TextView)v.findViewById(R.id.game_max_amount_text);
         game_count_value = (TextView) v.findViewById(R.id.game_count_value);
@@ -79,28 +61,6 @@ public class SandBoxFragment
             public void onClick(View view)
             {
                 startGame();
-            }
-        });
-        v.findViewById(R.id.test).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                PreferenceHelper.addGold(getActivity(), 50);
-                refreshGold();
-            }
-        });
-        v.findViewById(R.id.test).setOnLongClickListener(new View.OnLongClickListener()
-        {
-            @Override
-            public boolean onLongClick(View view)
-            {
-                PreferenceHelper.spendGold(getActivity(), PreferenceHelper.getGold(getActivity()));
-                PreferenceHelper.resetLevels(getActivity());
-                gameSettings.count = Difficults.MIN_COUNT;
-                gameSettings.difficult = Difficults.DIFFICULT_EASY;
-                refreshGold();
-                return false;
             }
         });
         easy_lable = v.findViewById(R.id.easy_lable);
@@ -145,7 +105,7 @@ public class SandBoxFragment
             }
         });
         gameSettings = new GameSettings(Difficults.MIN_COUNT, Difficults.DIFFICULT_EASY);
-        refreshGold();
+        updateFromLevel();
         updateFromGameSettings();
     }
 
@@ -160,8 +120,12 @@ public class SandBoxFragment
 
     private void updateFromGameSettings()
     {
-        game_max_amount_text.setText(gameSettings.difficult+"");
-        game_count_value.setText(""+gameSettings.count);
+//        game_max_amount_text.setText(gameSettings.difficult+"");
+        String amount_text = this.getResources().getString(R.string.combination_element_can_be, gameSettings.difficult);
+        game_max_amount_text.setText(Html.fromHtml(amount_text.replace("\n", "<br>")));
+//        game_count_value.setText(""+gameSettings.count);
+        String count_value = this.getResources().getString(R.string.count_elements, gameSettings.count);
+        game_count_value.setText(Html.fromHtml(count_value));
         int d = gameSettings.getDifficultLevel();
         Log.e(GameFragment.class.getCanonicalName(), "dif = " + d);
         easy_lable.setVisibility(View.GONE);
@@ -197,27 +161,13 @@ public class SandBoxFragment
                 can_lose.setVisibility(View.GONE);
         }
     }
-
-    public void refreshGold()
+    public void updateFromLevel()
     {
-        int g = PreferenceHelper.getGold(getActivity());
-        if(g < 999999999)
-        {
-            gold.setText(g + "");
-        }
-        else
-        {
-            gold.setText(R.string.much);
-        }
         int lvl = PreferenceHelper.getLevel(getActivity());
-        level_name.setText(LevelsNamesHelper.getLevelName(lvl));
-        int nextlvl = LevelController.getNextLevel(lvl);
         difficult.showHard(false);
         game_count_seek.setVisibility(View.VISIBLE);
         switch(lvl)
         {
-            case Levels.godlike:
-                buy_next_level_container.setVisibility(View.INVISIBLE);
             case Levels.master:
                 game_count_seek.setMax(Difficults.MAX_COUNT_MASTER - Difficults.MIN_COUNT);
                 break;
@@ -238,25 +188,6 @@ public class SandBoxFragment
             case Levels.diamond:
                 difficult.showHard(true);
         }
-        String text = getActivity().getResources().getString(R.string.for_coins, LevelController.getLevelPrice(nextlvl));
-        for_coins.setText(Html.fromHtml(text));
-    }
-
-    private void buyNextLevel()
-    {
-        int g = PreferenceHelper.getGold(getActivity());
-        int lvl = PreferenceHelper.getLevel(getActivity());
-        int nextlvl = LevelController.getNextLevel(lvl);
-        int p = LevelController.getLevelPrice(nextlvl);
-        if(p > g)
-        {
-            Toast.makeText(getActivity(), R.string.need_more_gold, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        PreferenceHelper.spendGold(getActivity(), p);
-        PreferenceHelper.levelUp(getActivity());
-        refreshGold();
-        LevelUpDialog.newInstance().show(getActivity().getSupportFragmentManager(), LevelUpDialog.class.getCanonicalName());
     }
 
     private void startGame()
