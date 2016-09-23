@@ -8,10 +8,11 @@ new version BullsCows app for published in the google play
 	applicationId "stan.bulls.cows"
 	minSdkVersion 15
 	targetSdkVersion 24
-	versionCode 1609231442
-	versionName "0.20dsgn"
+	versionCode 1609231923
+	versionName "0.21admob"
 ## dependencies
 	com.android.support:appcompat-v7:24.1.1
 	com.android.support:recyclerview-v7:24.1.1
+	com.google.firebase:firebase-ads:9.0.0
 ## gradle
     2.1.2

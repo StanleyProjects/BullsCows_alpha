@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import stan.bulls.cows.BuildConfig;
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.GameSettings;
@@ -25,6 +29,7 @@ public class MainActivity
         extends AppCompatActivity
 {
     //___________________VIEWS
+    private AdView ad_view;
     private DrawerLayout main_drawer;
     private TextView gold;
     private TextView for_coins;
@@ -66,6 +71,7 @@ public class MainActivity
     };
 
     private String help_url;
+    private String banner_ad_unit_id;
 
     @Override
     protected void onActivityResult(int request, int result, Intent intent)
@@ -85,6 +91,34 @@ public class MainActivity
         }
         super.onActivityResult(request, result, intent);
     }
+
+    @Override
+    public void onPause()
+    {
+        if(ad_view != null)
+        {
+            ad_view.pause();
+        }
+        super.onPause();
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if(ad_view != null)
+        {
+            ad_view.resume();
+        }
+    }
+    @Override
+    public void onDestroy()
+    {
+        if(ad_view != null)
+        {
+            ad_view.destroy();
+        }
+        super.onDestroy();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -95,7 +129,8 @@ public class MainActivity
     }
     private void initViews()
     {
-        main_drawer = (DrawerLayout) findViewById(R.id.main_drawer);
+        ad_view = (AdView)findViewById(R.id.ad_view);
+        main_drawer = (DrawerLayout)findViewById(R.id.main_drawer);
         gold = (TextView)findViewById(R.id.gold);
         for_coins = (TextView)findViewById(R.id.for_coins);
         level_name = (TextView)findViewById(R.id.level_name);
@@ -118,6 +153,7 @@ public class MainActivity
     }
     private void init()
     {
+        banner_ad_unit_id = getResources().getString(R.string.banner_ad_unit_id);
         help_url = getResources().getString(R.string.help_url);
         if(PreferenceHelper.getGold(this) == -1)
         {
@@ -127,11 +163,22 @@ public class MainActivity
         {
             PreferenceHelper.levelUp(this);
         }
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.main_frame, sandBoxFragment)
-                .commit();
+        getSupportFragmentManager().beginTransaction()
+                                   .add(R.id.main_frame, sandBoxFragment)
+                                   .commit();
         refreshGold();
+        initAd();
+    }
+    private void initAd()
+    {
+        if(PreferenceHelper.getLevel(this) == Levels.godlike)
+        {
+            ad_view.setVisibility(View.GONE);
+            return;
+        }
+        MobileAds.initialize(this, banner_ad_unit_id);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        ad_view.loadAd(adRequest);
     }
 
     public void refreshGold()
@@ -155,9 +202,11 @@ public class MainActivity
                 return;
         }
         int nextlvl = LevelController.getNextLevel(lvl);
-        String text = this.getResources().getString(R.string.for_coins, LevelController.getLevelPrice(nextlvl));
+        String text = this.getResources()
+                          .getString(R.string.for_coins, LevelController.getLevelPrice(nextlvl));
         for_coins.setText(Html.fromHtml(text));
     }
+
     private void buyNextLevel()
     {
         int g = PreferenceHelper.getGold(this);
@@ -166,13 +215,15 @@ public class MainActivity
         int p = LevelController.getLevelPrice(nextlvl);
         if(p > g)
         {
-            Toast.makeText(this, R.string.need_more_gold, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.need_more_gold, Toast.LENGTH_SHORT)
+                 .show();
             return;
         }
         PreferenceHelper.spendGold(this, p);
         PreferenceHelper.levelUp(this);
         refreshGold();
-        LevelUpDialog.newInstance().show(this.getSupportFragmentManager(), LevelUpDialog.class.getCanonicalName());
+        LevelUpDialog.newInstance()
+                     .show(this.getSupportFragmentManager(), LevelUpDialog.class.getCanonicalName());
         sandBoxFragment.updateFromLevel();
     }
 
@@ -181,14 +232,17 @@ public class MainActivity
         PreferenceHelper.addGold(MainActivity.this, 50);
         refreshGold();
     }
+
     private void menu()
     {
         main_drawer.openDrawer(GravityCompat.START);
     }
+
     private void rateApp()
     {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID)));
     }
+
     private void shareProgress()
     {
         Intent sendIntent = new Intent();
@@ -197,10 +251,12 @@ public class MainActivity
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }
+
     private void getHelp()
     {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(help_url)));
     }
+
     private void killProgress()
     {
         PreferenceHelper.spendGold(MainActivity.this, PreferenceHelper.getGold(MainActivity.this));

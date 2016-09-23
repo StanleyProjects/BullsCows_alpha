@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">BullsCows</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6916191358710501/2519266070</string>
+
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
