@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+              android:layout_width="288dp"
               android:layout_height="48dp"
-              android:paddingBottom="2dp"
-              android:paddingLeft="2dp"
-              android:paddingTop="2dp">
-
+              android:paddingLeft="2dp">
     <FrameLayout
         android:id="@+id/easy"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginRight="2dp"
         android:layout_weight="1">
-
         <TextView
             android:id="@+id/easy_text"
             android:layout_width="wrap_content"
@@ -22,7 +18,6 @@
             android:text="@string/easy"
             android:textAllCaps="true"/>
     </FrameLayout>
-
     <FrameLayout
         android:id="@+id/medium"
         android:layout_width="0dp"
@@ -39,7 +34,6 @@
             android:text="@string/medium"
             android:textAllCaps="true"/>
     </FrameLayout>
-
     <FrameLayout
         android:id="@+id/hard"
         android:layout_width="0dp"

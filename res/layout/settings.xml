@@ -29,9 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </FrameLayout>
-    <stan.bulls.cows.ui.views.selectors.DifficultSelector
+    <stan.bulls.cows.ui.views.selectors.DifficultPrimarySelector
         android:id="@+id/difficult"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"/>
     <TextView
         android:id="@+id/game_max_amount_text"

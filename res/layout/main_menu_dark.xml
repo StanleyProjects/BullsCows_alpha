@@ -77,7 +77,6 @@
             </LinearLayout>
             <FrameLayout
                 android:id="@+id/buy_next_level_container"
-                android:background="@color/white_trans"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
                 <View
@@ -214,7 +213,7 @@
             </FrameLayout>
             <Button
                 android:id="@+id/test"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:text="test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

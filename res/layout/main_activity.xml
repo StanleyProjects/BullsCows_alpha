@@ -28,6 +28,54 @@
                 android:layout_width="48dp"
                 android:layout_height="match_parent"/>
         </FrameLayout>
+        <!--<LinearLayout-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/menu"-->
+                <!--android:background="@drawable/white_ripple"-->
+                <!--android:clickable="true"-->
+                <!--android:src="@drawable/ic_menu_white_24dp"-->
+                <!--android:tint="@color/white"-->
+                <!--android:scaleType="center"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="match_parent"/>-->
+            <!--<FrameLayout-->
+                <!--android:layout_gravity="right"-->
+                <!--android:id="@+id/buy_next_level_container"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent">-->
+                <!--<View-->
+                    <!--android:id="@+id/buy_next_level"-->
+                    <!--android:clickable="true"-->
+                    <!--android:background="@drawable/white_ripple"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"/>-->
+                <!--<LinearLayout-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginRight="16dp"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent">-->
+                    <!--<ImageView-->
+                        <!--android:src="@drawable/ic_monetization_on_white_24dp"-->
+                        <!--android:scaleType="center"-->
+                        <!--android:tint="@color/white"-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_marginRight="16dp"-->
+                        <!--android:layout_height="match_parent"/>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/for_coins"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:text="@string/for_coins"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="16dp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"/>-->
+                <!--</LinearLayout>-->
+            <!--</FrameLayout>-->
+        <!--</LinearLayout>-->
         <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"

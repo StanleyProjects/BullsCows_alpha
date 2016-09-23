@@ -37,7 +37,7 @@ public class DifficultPrimarySelector
                     {
                         difficult = DIFFICULT_EASY;
                         clearAll();
-                        easy.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        easy.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         easy_text.setTextColor(getResources().getColor(R.color.white));
                         listener.setDifficult(DIFFICULT_EASY);
                     }
@@ -47,7 +47,7 @@ public class DifficultPrimarySelector
                     {
                         difficult = DIFFICULT_MEDIUM;
                         clearAll();
-                        medium.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        medium.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         medium_text.setTextColor(getResources().getColor(R.color.white));
                         listener.setDifficult(DIFFICULT_MEDIUM);
                     }
@@ -57,7 +57,7 @@ public class DifficultPrimarySelector
                     {
                         difficult = DIFFICULT_HARD;
                         clearAll();
-                        hard.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        hard.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         hard_text.setTextColor(getResources().getColor(R.color.white));
                         listener.setDifficult(DIFFICULT_HARD);
                     }
@@ -81,9 +81,13 @@ public class DifficultPrimarySelector
         easy.setOnClickListener(clickListener);
         medium.setOnClickListener(clickListener);
         hard.setOnClickListener(clickListener);
+        reset();
+    }
+    public void reset()
+    {
         difficult = DIFFICULT_EASY;
         clearAll();
-        easy.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        easy.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         easy_text.setTextColor(getResources().getColor(R.color.white));
     }
 
@@ -94,22 +98,12 @@ public class DifficultPrimarySelector
 
     private void clearAll()
     {
-        int sdk = android.os.Build.VERSION.SDK_INT;
-        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN)
-        {
-            easy.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_ripple));
-            medium.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_ripple));
-            hard.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_ripple));
-        }
-        else
-        {
-            easy.setBackground(getResources().getDrawable(R.drawable.white_ripple));
-            medium.setBackground(getResources().getDrawable(R.drawable.white_ripple));
-            hard.setBackground(getResources().getDrawable(R.drawable.white_ripple));
-        }
-        easy_text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        medium_text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        hard_text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        easy.setBackgroundDrawable(getResources().getDrawable(R.drawable.black_ripple));
+        medium.setBackgroundDrawable(getResources().getDrawable(R.drawable.black_ripple));
+        hard.setBackgroundDrawable(getResources().getDrawable(R.drawable.black_ripple));
+        easy_text.setTextColor(getResources().getColor(R.color.black_trans));
+        medium_text.setTextColor(getResources().getColor(R.color.black_trans));
+        hard_text.setTextColor(getResources().getColor(R.color.black_trans));
     }
 
     public void setListener(DifficultListener l)

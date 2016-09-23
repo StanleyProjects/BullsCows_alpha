@@ -30,8 +30,8 @@ public class SandBoxFragment
     private TextView game_count_value;
     private View game_count_frame;
     private SeekBar game_count_seek;
-    private DifficultSelector difficult;
-//    private DifficultPrimarySelector difficult;
+//    private DifficultSelector difficult;
+    private DifficultPrimarySelector difficult;
     private TextView game_max_amount_text;
     private View easy_lable;
     private View check_quality;
@@ -54,8 +54,8 @@ public class SandBoxFragment
     }
     private void initViews(View v)
     {
-        difficult = (DifficultSelector)v.findViewById(R.id.difficult);
-//        difficult = (DifficultPrimarySelector)v.findViewById(R.id.difficult);
+//        difficult = (DifficultSelector)v.findViewById(R.id.difficult);
+        difficult = (DifficultPrimarySelector)v.findViewById(R.id.difficult);
         game_max_amount_text = (TextView)v.findViewById(R.id.game_max_amount_text);
         game_count_value = (TextView) v.findViewById(R.id.game_count_value);
         game_count_frame = v.findViewById(R.id.game_count_frame);
@@ -79,8 +79,8 @@ public class SandBoxFragment
 
     private void init()
     {
-        difficult.setListener(new DifficultSelector.DifficultListener()
-//        difficult.setListener(new DifficultPrimarySelector.DifficultListener()
+//        difficult.setListener(new DifficultSelector.DifficultListener()
+        difficult.setListener(new DifficultPrimarySelector.DifficultListener()
         {
             @Override
             public void setDifficult(int dif)
