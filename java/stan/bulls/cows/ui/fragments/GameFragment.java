@@ -5,7 +5,6 @@ import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import java.util.Random;
 
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.GameController;
-import stan.bulls.cows.core.GameResult;
 import stan.bulls.cows.core.GameSettings;
 import stan.bulls.cows.core.ResultGame;
 import stan.bulls.cows.core.offers.NumberOffer;
@@ -162,11 +160,11 @@ public class GameFragment
             {
                 OfferListItem newOfferListItem = new OfferListItem();
                 results_frame.setVisibility(View.VISIBLE);
+                gameController.updateCountOffers();
                 switch(gameController.getSettings().getDifficultLevel())
                 {
                     case 5:
                     case 4:
-                        gameController.updateCountOffers();
                         try_count.setText((gameController.getSettings().getCountOffers() - data.size()) + "");
                         try_left.setVisibility(View.VISIBLE);
                     case 3:
@@ -189,13 +187,13 @@ public class GameFragment
             public void initFromOffer(GameSettings settings, Offer newOffer, long timeOffer)
             {
                 OfferListItem newOfferListItem = new OfferListItem();
+                gameController.updateCountOffers();
                 switch (settings.getDifficultLevel())
                 {
                     case 5:
                     case 4:
                         if(gameController.canUpdateCountOffers())
                         {
-                            gameController.updateCountOffers();
                             try_count.setText((gameController.getSettings().getCountOffers() - data.size()) + "");
                         }
                         else
@@ -378,13 +376,6 @@ public class GameFragment
             @Override
             public void onFinish()
             {
-//                int r = gameController.getSettings().getTimeOffer() * gameController.getSettings().getDifficultLevel();
-//                r -= gameController.getSettings().getTimeOffer() * ((gameController.getSettings().getDifficultLevel()-1)/2);
-//                r /= gameController.getSettings().getDifficultLevel();
-//                if(gameController.getSpendTimeOffer() > r)
-//                {
-//                    gameController.getSettings().time_offer.addBadOffer(data.size(), gameController.getSettings());
-//                }
                 gameController.checkGameLose();
                 time_offer_secconds.setVisibility(View.GONE);
                 time_offer_much.setVisibility(View.VISIBLE);

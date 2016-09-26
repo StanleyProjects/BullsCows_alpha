@@ -6,6 +6,7 @@ import stan.bulls.cows.core.GameSettings;
 public class CountOfferGameResult
         implements GameResult
 {
+    static private int MAX_COUNT = 30;
     private int count;
     @Override
     public boolean isReward(GameSettings settings)
@@ -30,6 +31,10 @@ public class CountOfferGameResult
     @Override
     public boolean isEndGame(GameSettings settings)
     {
+        if(getResult() >= MAX_COUNT)
+        {
+            return true;
+        }
         if(settings.getDifficultLevel()<5)
         {
             return false;

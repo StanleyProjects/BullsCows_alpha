@@ -9,24 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.Difficults;
 import stan.bulls.cows.core.GameSettings;
-import stan.bulls.cows.core.LevelController;
 import stan.bulls.cows.core.Levels;
 import stan.bulls.cows.helpers.PreferenceHelper;
-import stan.bulls.cows.helpers.ui.LevelsNamesHelper;
 import stan.bulls.cows.ui.activities.GameActivity;
-import stan.bulls.cows.ui.fragments.dialogs.LevelUpDialog;
 import stan.bulls.cows.ui.views.selectors.DifficultPrimarySelector;
-import stan.bulls.cows.ui.views.selectors.DifficultSelector;
 
 public class SandBoxFragment
         extends Fragment
 {
     //___________________VIEWS
+    private AdView ad_view;
     private TextView game_count_value;
     private View game_count_frame;
     private SeekBar game_count_seek;
@@ -43,7 +43,35 @@ public class SandBoxFragment
 
     //___________________FIELDS
     private GameSettings gameSettings;
+    private String banner_ad_unit_id;
 
+    @Override
+    public void onPause()
+    {
+        if(ad_view != null)
+        {
+            ad_view.pause();
+        }
+        super.onPause();
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if(ad_view != null)
+        {
+            ad_view.resume();
+        }
+    }
+    @Override
+    public void onDestroy()
+    {
+        if(ad_view != null)
+        {
+            ad_view.destroy();
+        }
+        super.onDestroy();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -54,6 +82,7 @@ public class SandBoxFragment
     }
     private void initViews(View v)
     {
+        ad_view = (AdView)v.findViewById(R.id.ad_view);
 //        difficult = (DifficultSelector)v.findViewById(R.id.difficult);
         difficult = (DifficultPrimarySelector)v.findViewById(R.id.difficult);
         game_max_amount_text = (TextView)v.findViewById(R.id.game_max_amount_text);
@@ -79,6 +108,7 @@ public class SandBoxFragment
 
     private void init()
     {
+        banner_ad_unit_id = getActivity().getResources().getString(R.string.banner_ad_unit_id);
 //        difficult.setListener(new DifficultSelector.DifficultListener()
         difficult.setListener(new DifficultPrimarySelector.DifficultListener()
         {
@@ -200,6 +230,17 @@ public class SandBoxFragment
         gameSettings.difficult = Difficults.DIFFICULT_EASY;
         game_count_seek.setProgress(0);
         difficult.reset();
+        updateAd();
+    }
+    private void updateAd()
+    {
+        if(PreferenceHelper.getLevel(getActivity()) == Levels.godlike)
+        {
+            ad_view.setVisibility(View.GONE);
+            return;
+        }
+        MobileAds.initialize(getActivity(), banner_ad_unit_id);
+        ad_view.loadAd(new AdRequest.Builder().build());
     }
 
     private void startGame()

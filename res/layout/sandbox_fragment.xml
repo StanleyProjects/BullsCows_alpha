@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:ads="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
     <include layout="@layout/settings"/>
     <!--<include layout="@layout/settings_primary"/>-->
-    <include layout="@layout/game_settings_frame_dark"
-             android:layout_gravity="bottom"
-             android:layout_width="match_parent"
-             android:layout_height="88dp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/ad_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id" />
+        <include layout="@layout/game_settings_frame_dark"
+                 android:layout_width="match_parent"
+                 android:layout_height="88dp"/>
+    </LinearLayout>
 </FrameLayout>

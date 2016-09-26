@@ -11,10 +11,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-
 import stan.bulls.cows.BuildConfig;
 import stan.bulls.cows.R;
 import stan.bulls.cows.core.GameSettings;
@@ -29,7 +25,6 @@ public class MainActivity
         extends AppCompatActivity
 {
     //___________________VIEWS
-    private AdView ad_view;
     private DrawerLayout main_drawer;
     private TextView gold;
     private TextView for_coins;
@@ -71,7 +66,6 @@ public class MainActivity
     };
 
     private String help_url;
-    private String banner_ad_unit_id;
 
     @Override
     protected void onActivityResult(int request, int result, Intent intent)
@@ -91,34 +85,6 @@ public class MainActivity
         }
         super.onActivityResult(request, result, intent);
     }
-
-    @Override
-    public void onPause()
-    {
-        if(ad_view != null)
-        {
-            ad_view.pause();
-        }
-        super.onPause();
-    }
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        if(ad_view != null)
-        {
-            ad_view.resume();
-        }
-    }
-    @Override
-    public void onDestroy()
-    {
-        if(ad_view != null)
-        {
-            ad_view.destroy();
-        }
-        super.onDestroy();
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -129,7 +95,6 @@ public class MainActivity
     }
     private void initViews()
     {
-        ad_view = (AdView)findViewById(R.id.ad_view);
         main_drawer = (DrawerLayout)findViewById(R.id.main_drawer);
         gold = (TextView)findViewById(R.id.gold);
         for_coins = (TextView)findViewById(R.id.for_coins);
@@ -153,7 +118,6 @@ public class MainActivity
     }
     private void init()
     {
-        banner_ad_unit_id = getResources().getString(R.string.banner_ad_unit_id);
         help_url = getResources().getString(R.string.help_url);
         if(PreferenceHelper.getGold(this) == -1)
         {
@@ -167,18 +131,6 @@ public class MainActivity
                                    .add(R.id.main_frame, sandBoxFragment)
                                    .commit();
         refreshGold();
-        initAd();
-    }
-    private void initAd()
-    {
-        if(PreferenceHelper.getLevel(this) == Levels.godlike)
-        {
-            ad_view.setVisibility(View.GONE);
-            return;
-        }
-        MobileAds.initialize(this, banner_ad_unit_id);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        ad_view.loadAd(adRequest);
     }
 
     public void refreshGold()
