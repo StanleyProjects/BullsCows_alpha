@@ -12,6 +12,7 @@ public class PreferenceHelper
 
     static private final String GOLD_KEY = PREFS_KEY + "." + "gold_key";
     static private final String LEVEL_KEY = PREFS_KEY + "." + "level_key";
+    static private final String FIRST_LAUNCH_KEY = PREFS_KEY + "." + "first_launch_key";
 
     static public void addGold(Context context, int g)
     {
@@ -54,5 +55,18 @@ public class PreferenceHelper
     {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
         return preferences.getInt(LEVEL_KEY, -1);
+    }
+
+    static public boolean isFirstLaunch(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+        return preferences.getBoolean(FIRST_LAUNCH_KEY, true);
+    }
+    static public void firstLaunch(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(FIRST_LAUNCH_KEY, false);
+        editor.commit();
     }
 }

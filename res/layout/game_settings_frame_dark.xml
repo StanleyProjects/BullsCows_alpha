@@ -5,6 +5,7 @@
              android:layout_height="88dp">
     <LinearLayout
         android:id="@+id/easy_lable"
+        android:visibility="gone"
         android:layout_marginLeft="16dp"
         android:layout_gravity="center_vertical"
         android:gravity="center"

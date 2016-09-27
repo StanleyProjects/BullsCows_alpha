@@ -4,7 +4,6 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
     <include layout="@layout/settings"/>
-    <!--<include layout="@layout/settings_primary"/>-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_gravity="bottom"

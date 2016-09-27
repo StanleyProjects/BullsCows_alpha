@@ -11,6 +11,7 @@
             android:id="@+id/time"
             android:layout_gravity="center"
             android:src="@drawable/ic_access_time_white_24dp"
+            android:scaleType="center"
             android:layout_width="24dp"
             android:layout_height="24dp"/>
     </FrameLayout>

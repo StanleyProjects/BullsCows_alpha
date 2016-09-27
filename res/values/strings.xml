@@ -77,4 +77,21 @@
     <string name="help">Get help</string>
     <string name="kill_progress">Kill your progress</string>
     <string name="help_url">https://kepocnhh.github.io/</string>
+    <string name="show_game_difficults_title">Change difficults your game.</string>
+    <string name="show_game_difficults_submessage">For your game you can change count from slider and range numbers from difficult selector. Try it.</string>
+    <string name="show_game_settings_title">See your game settings and features.</string>
+    <string name="show_game_settings_submessage">You can see there settings for time game and only for one offer. Also will be considered count offers and their quality. Can you get mulct and lose game.</string>
+    <string name="done">Done</string>
+    <string name="show_menu_title">Open menu if you need help.</string>
+    <string name="show_menu_submessage">Inside menu you can see your game progress. Earned gold. Achieved level. Also you can get help and kill you progress.</string>
+    <string name="show_new_game_title">Tap \"GO!\" button for begin new game</string>
+    <string name="show_new_game_submessage">After setting you game you will be able to compete.</string>
+    <string name="show_add_offer_title">Use special keyboard to create new offer.</string>
+    <string name="show_add_offer_submessage">Add numbers. If you doubt you can press to refresh offer. And when you will be ready safely click on \"OK\". You can try it now.</string>
+    <string name="show_in_game_submessage1">Pay attention. During the game you will be shown time one offer and their quality (if you make mistake). Also you can see bulls and cows counts.</string>
+    <string name="show_in_game_submessage2">Here you can see time all game. How much time you have for one offer. And how many attempts you have left.</string>
+    <string name="show_in_game_title1">Follow your progress.</string>
+    <string name="show_in_game_title2">And follow for your game results.</string>
+    <string name="show_greeting_title">Greeting!</string>
+    <string name="show_greeting_submessage">Welcome to game. Here you can compete in the speed of thought. Earn gold. And brag to your friends.</string>
 </resources>

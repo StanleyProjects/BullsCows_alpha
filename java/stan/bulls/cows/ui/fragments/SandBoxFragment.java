@@ -234,13 +234,20 @@ public class SandBoxFragment
     }
     private void updateAd()
     {
-        if(PreferenceHelper.getLevel(getActivity()) == Levels.godlike)
+        ad_view.post(new Runnable()
         {
-            ad_view.setVisibility(View.GONE);
-            return;
-        }
-        MobileAds.initialize(getActivity(), banner_ad_unit_id);
-        ad_view.loadAd(new AdRequest.Builder().build());
+            @Override
+            public void run()
+            {
+                if(PreferenceHelper.getLevel(getActivity()) == Levels.godlike)
+                {
+                    ad_view.setVisibility(View.GONE);
+                    return;
+                }
+                MobileAds.initialize(getActivity(), banner_ad_unit_id);
+                ad_view.loadAd(new AdRequest.Builder().build());
+            }
+        });
     }
 
     private void startGame()

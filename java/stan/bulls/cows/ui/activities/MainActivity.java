@@ -131,6 +131,11 @@ public class MainActivity
                                    .add(R.id.main_frame, sandBoxFragment)
                                    .commit();
         refreshGold();
+        if(PreferenceHelper.isFirstLaunch(this))
+        {
+            PreferenceHelper.firstLaunch(this);
+            startActivity(new Intent(this, GreetingActivity.class));
+        }
     }
 
     public void refreshGold()
@@ -206,7 +211,8 @@ public class MainActivity
 
     private void getHelp()
     {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(help_url)));
+//        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(help_url)));
+        startActivity(new Intent(this, GreetingActivity.class));
     }
 
     private void killProgress()
