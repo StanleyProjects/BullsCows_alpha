@@ -94,4 +94,8 @@
     <string name="show_in_game_title2">And follow for your game results.</string>
     <string name="show_greeting_title">Greeting!</string>
     <string name="show_greeting_submessage">Welcome to game. Here you can compete in the speed of thought. Earn gold. And brag to your friends.</string>
+    <string name="to_rules">Rules</string>
+    <string name="you_can_get_help">Also you can get more help.</string>
+    <string name="read_rules_help_text">Read rules for more information about game features. Search for answers there.</string>
+    <string name="share_text">I earned %1$s coins and reached the %2$s level in game %3$s\nTry it! You should like it.</string>
 </resources>

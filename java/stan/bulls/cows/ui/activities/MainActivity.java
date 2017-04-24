@@ -58,6 +58,9 @@ public class MainActivity
                 case R.id.get_help:
                     getHelp();
                     break;
+                case R.id.to_rules:
+                    toRules();
+                    break;
                 case R.id.kill_progress:
                     killProgress();
                     break;
@@ -115,9 +118,11 @@ public class MainActivity
         findViewById(R.id.share_progress).setOnClickListener(clickListener);
         findViewById(R.id.get_help).setOnClickListener(clickListener);
         findViewById(R.id.kill_progress).setOnClickListener(clickListener);
+        findViewById(R.id.to_rules).setOnClickListener(clickListener);
     }
     private void init()
     {
+//        shareText = getResources().getString(R.string.share_text);//Я заработал МНОГО золота и достиг уровня УРОВЕНЬ в игре ССЫЛКА. Попробуй обязательно! Тебе должно понравится.
         help_url = getResources().getString(R.string.help_url);
         if(PreferenceHelper.getGold(this) == -1)
         {
@@ -159,8 +164,7 @@ public class MainActivity
                 return;
         }
         int nextlvl = LevelController.getNextLevel(lvl);
-        String text = this.getResources()
-                          .getString(R.string.for_coins, LevelController.getLevelPrice(nextlvl));
+        String text = getResources().getString(R.string.for_coins, LevelController.getLevelPrice(nextlvl)+"");
         for_coins.setText(Html.fromHtml(text));
     }
 
@@ -204,7 +208,10 @@ public class MainActivity
     {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        int g = PreferenceHelper.getGold(this);
+        int lvl = PreferenceHelper.getLevel(this);
+        String text = getResources().getString(R.string.share_text, g+"", getResources().getString(LevelsNamesHelper.getLevelName(lvl)).toUpperCase(), "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }
@@ -213,6 +220,10 @@ public class MainActivity
     {
 //        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(help_url)));
         startActivity(new Intent(this, GreetingActivity.class));
+    }
+    private void toRules()
+    {
+//        startActivity(new Intent(this, GreetingActivity.class));//TODO create rules screen
     }
 
     private void killProgress()
