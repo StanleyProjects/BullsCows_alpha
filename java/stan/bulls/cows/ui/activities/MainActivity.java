@@ -19,6 +19,7 @@ import stan.bulls.cows.core.Levels;
 import stan.bulls.cows.helpers.PreferenceHelper;
 import stan.bulls.cows.helpers.ui.LevelsNamesHelper;
 import stan.bulls.cows.ui.fragments.SandBoxFragment;
+import stan.bulls.cows.ui.fragments.dialogs.KillProgressDialog;
 import stan.bulls.cows.ui.fragments.dialogs.LevelUpDialog;
 
 public class MainActivity
@@ -228,9 +229,18 @@ public class MainActivity
 
     private void killProgress()
     {
-        PreferenceHelper.spendGold(MainActivity.this, PreferenceHelper.getGold(MainActivity.this));
-        PreferenceHelper.resetLevels(MainActivity.this);
-        refreshGold();
-        sandBoxFragment.updateFromLevel();
+        KillProgressDialog.newInstance(new KillProgressDialog.Listener()
+        {
+            public void apply()
+            {
+                PreferenceHelper.spendGold(MainActivity.this, PreferenceHelper.getGold(MainActivity.this));
+                PreferenceHelper.resetLevels(MainActivity.this);
+                refreshGold();
+                sandBoxFragment.updateFromLevel();
+            }
+            public void cancel()
+            {
+            }
+        }).show(getFragmentManager(), KillProgressDialog.class.getName());
     }
 }

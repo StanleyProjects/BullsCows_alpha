@@ -98,4 +98,7 @@
     <string name="you_can_get_help">Also you can get more help.</string>
     <string name="read_rules_help_text">Read rules for more information about game features. Search for answers there.</string>
     <string name="share_text">I earned %1$s coins and reached the %2$s level in game %3$s\nTry it! You should like it.</string>
+    <string name="danger">Danger!</string>
+    <string name="kill_progress_description">All progress will be completely reset and the game will start again. Are you sure?</string>
+    <string name="kill_progress_long_click_required">Make long click for real kill progress</string>
 </resources>
