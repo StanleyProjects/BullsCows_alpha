@@ -26,6 +26,8 @@
             android:textSize="18dp"
             android:textColor="@color/colorAccent"
             android:text="@string/offers_list_submessage_empty"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -133,7 +135,7 @@
             android:paddingLeft="8dp"
             android:layout_gravity="center_vertical|right"
             android:background="@drawable/white_primary_border"
-            android:layout_width="108dp"
+            android:layout_width="124dp"
             android:layout_height="32dp">
             <LinearLayout
                 android:id="@+id/count_offers_tries"

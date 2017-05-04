@@ -1,8 +1,6 @@
 <manifest package="stan.bulls.cows"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,6 +18,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.GreetingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.RulesActivity"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -6,8 +6,8 @@ new version BullsCows app for published in the [GooglePlay](https://play.google.
 # Build information
 ## defaultConfig
 	applicationId "stan.bulls.cows"
-	versionCode 1705031437
-	versionName "0.00.27"
+	versionCode 1705041719
+	versionName "0.01.01"
 ## dependencies
 	com.android.support:appcompat-v7:25.3.1
 	com.android.support:recyclerview-v7:25.3.1

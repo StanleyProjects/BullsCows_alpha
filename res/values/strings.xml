@@ -57,6 +57,7 @@
     <string name="good_luck">Good luck.</string>
     <string name="godlike_level_up_description">You godlike. Enjoy the victory.</string>
     <string name="bronze_level_up_description">Now you can change count elements of combination. Good luck.</string>
+    <string name="silver_level_up_description">Good luck.</string>
     <string name="diamond_level_up_description">Now you can choose hard difficult. Good luck.</string>
     <string name="master_level_up_description">You open all existing features. But you still do not godlike. Good luck.</string>
     <string name="info">Information</string>
@@ -101,4 +102,5 @@
     <string name="danger">Danger!</string>
     <string name="kill_progress_description">All progress will be completely reset and the game will start again. Are you sure?</string>
     <string name="kill_progress_long_click_required">Make long click for real kill progress</string>
+    <string name="rules_text">Rules text not exist for this language!</string>
 </resources>

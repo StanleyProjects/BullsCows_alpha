@@ -181,6 +181,7 @@ public class MainActivity
                  .show();
             return;
         }
+        main_drawer.closeDrawer(GravityCompat.START);
         PreferenceHelper.spendGold(this, p);
         PreferenceHelper.levelUp(this);
         refreshGold();
@@ -202,11 +203,13 @@ public class MainActivity
 
     private void rateApp()
     {
+        main_drawer.closeDrawer(GravityCompat.START);
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID)));
     }
 
     private void shareProgress()
     {
+        main_drawer.closeDrawer(GravityCompat.START);
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         int g = PreferenceHelper.getGold(this);
@@ -224,7 +227,8 @@ public class MainActivity
     }
     private void toRules()
     {
-//        startActivity(new Intent(this, GreetingActivity.class));//TODO create rules screen
+        main_drawer.closeDrawer(GravityCompat.START);
+        startActivity(new Intent(this, RulesActivity.class));
     }
 
     private void killProgress()
@@ -233,6 +237,7 @@ public class MainActivity
         {
             public void apply()
             {
+                main_drawer.closeDrawer(GravityCompat.START);
                 PreferenceHelper.spendGold(MainActivity.this, PreferenceHelper.getGold(MainActivity.this));
                 PreferenceHelper.resetLevels(MainActivity.this);
                 refreshGold();

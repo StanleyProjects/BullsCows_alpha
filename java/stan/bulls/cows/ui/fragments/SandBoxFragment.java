@@ -143,6 +143,7 @@ public class SandBoxFragment
         gameSettings = new GameSettings(Difficults.MIN_COUNT, Difficults.DIFFICULT_EASY);
         updateFromLevel();
         updateFromGameSettings();
+//        ad_view.setVisibility(View.GONE);
     }
 
     private void setCount(int c)
@@ -246,6 +247,7 @@ public class SandBoxFragment
                 }
                 MobileAds.initialize(getActivity(), banner_ad_unit_id);
                 ad_view.loadAd(new AdRequest.Builder().build());
+                ad_view.setVisibility(View.VISIBLE);
             }
         });
     }

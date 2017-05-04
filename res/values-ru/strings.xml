@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rules_text"><![CDATA[<meta charset="utf-8"/>
+<p>Итак, всё просто, мой друг.</p>
+<p>Загадываются несколько цифр. Это называется <strong><font color=\"#FF0000\">секрет</font></strong>. Тебе известно точно <em>сколько</em> их будет, например их может быть 3. И <em>какими</em> они могут быть, например любые цифры от 0 и до 3.</p>
+<p>А тебе нужно отгадать <font color=\"#FF0000\"><strong>секрет</strong></font>. Вот и всё. Ты просто берёшь и предлагаешь свои <strong><font color=\"#ff6600\">варианты</font></strong>. А когда ты предложишь, ты узнаешь сколько в твоём <strong><font color=\"#ff6600\">варианте</font> </strong><em><font color=\"#ff00ff\">быков</font> </em>и <em><font color=\"#ff00ff\">коров</font></em>. Это поможет тебе отгадать <font color=\"#FF0000\"><strong>секрет</strong></font>.</p>
+<p><em><font color=\"#ff00ff\">Бык</font> </em>- это цифра, которая есть и в твоём <font color=\"#ff6600\"><strong>варианте</strong> </font>и в <strong><font color=\"#FF0000\">секрете</font></strong>. И ты поставил эту цифру в тоже место, что и в <strong><font color=\"#FF0000\">секрете</font></strong>.</p>
+<p>Например, если <strong><font color=\"#FF0000\">секрет</font> </strong>- 031, а твой вариант 012, тогда расклад такой. 0 - это <em><font color=\"#ff00ff\">бык</font></em>. А 1 - это <strong>НЕ&nbsp;</strong><em><font color=\"#ff00ff\">бык</font></em>. И 2 - это тоже <strong>НЕ&nbsp;</strong><em><font color=\"#ff00ff\">бык</font></em>.</p>
+<p><em><font color=\"#ff00ff\">Корова</font> </em>- это цифра, которая есть и в твоём <strong><font color=\"#ff6600\">варианте</font> </strong>и в <strong><font color=\"#FF0000\">секрете</font></strong>. И она <strong>НЕ&nbsp;</strong><em><font color=\"#ff00ff\">бык</font></em>.</p>
+<p>Вернёмся к <strong><font color=\"#FF0000\">секрету</font> </strong>031 и твоему <strong><font color=\"#ff6600\">варианту</font> </strong>012. Итак 1 - это <em><font color=\"#ff00ff\">корова</font></em>. А 0 - это <strong>НЕ&nbsp;</strong><em><font color=\"#ff00ff\">корова</font></em>, достаточно того, что 0 уже <em><font color=\"#ff00ff\">бык</font></em>. А 2 тоже&nbsp;<strong>НЕ</strong> <em><font color=\"#ff00ff\">корова</font></em>. 2 в твоём варианте вообще никто.</p>
+<p>Таким образом ты легко сможешь определить, что приближаешься к победе.</p>
+<p>Итак ты предложил <strong><font color=\"#ff6600\">вариант</font></strong>: 012. И тебе показали - 1 <em><font color=\"#ff00ff\">бык</font></em> и 1 <em><font color=\"#ff00ff\">корова</font></em>. Из этого можно сделать вывод - в <strong><font color=\"#FF0000\">секрете</font> </strong>точно есть две цифры из твоего <strong><font color=\"#ff6600\">варианта</font></strong>. 1 <em><font color=\"#ff00ff\">бык </font></em>+ 1 <em><font color=\"#ff00ff\">корова</font> </em>= 2. А ещё тебе известно что одна цифра точно стоит так как у тебя, а другая точно <strong>НЕ</strong> так как у тебя. Т.е. следующий <strong><font color=\"#ff6600\">вариант</font> </strong>должен быть предложен из&nbsp;302, 132, 213, 312, 031 и наконец 031. Вы видите это!? Рассуждая мы сократили круг возможных вариантов до шести и среди них есть <strong><font color=\"#FF0000\">секрет</font></strong>... только тссс... это <strong><font color=\"#FF0000\">секрет</font></strong>. Продолжай в том же духе и тебе будут не почём любые загадки.</p>]]></string>
+    <string name="add_offer_dialog_label">Твой вариант</string>
+    <string name="bronze_level_up_description">Теперь ты можешь изменять количество элементов в комбинации. Удачи.</string>
+    <string name="silver_level_up_description">Теперь длина комбинации может быть ещё больше. Удачи.</string>
+    <string name="diamond_level_up_description">Теперь ты можешь выбрать последнюю сложность. Удачи.</string>
+    <string name="master_level_up_description">Ты открыл все существующие возможности. Но ты всё ещё не бог. Удачи.</string>
+    <string name="godlike_level_up_description">Ты богоподобен. Наслаждайся победой (реклама, как и обещано, больше не будет тебя доставать).</string>
+    <string name="can_lose">можно проиграть</string>
+    <string name="count_elements">Длина секрета:
+        <![CDATA[<big>
+        <font color=\'#9C27B0\'>%s</font>
+        </big>]]></string>
+    <string name="combination_element_can_be">Элемент комбинации может быть\nот
+        <![CDATA[<big>
+        <font color=\'#9C27B0\'>0</font>
+        </big>]]>
+     и до
+        <![CDATA[<big>
+        <font color=\'#9C27B0\'>%s</font>
+        </big>]]></string>
+    <string name="easy">Легко</string>
+    <string name="medium">Средне</string>
+    <string name="hard">Тяжело</string>
+
+    <string name="offers_list_submessage_empty">Предложи свой первый вариант, чтобы начать игру</string>
+    <string name="offers_list_submessage_begin_game">А время идёт!</string>
+
+    <string name="unrewarded">тренировка</string>
+    <!--<string name="check_quality">учитывается качество</string>-->
+    <string name="check_quality">слежу за ошибками</string>
+    <string name="note_the_time">время идёт</string>
+    <string name="with_mulct">со штрафами</string>
+    <string name="note_the_time_offer">слежу за временем попыток</string>
+    <string name="check_count_offers">считаю попытки</string>
+
+    <string name="congratulations">Поздравляю!</string>
+    <string name="offers_made">Попыток:</string>
+    <string name="time_spend">За время:</string>
+    <string name="gold_earned">Заработано монет:</string>
+    <string name="quality_reward">бонус за качество</string>
+    <string name="quality_mulct">штраф за ошибки</string>
+    <string name="time_game_reward">бонус за скорость</string>
+    <string name="time_game_mulct">штраф за медленную игру</string>
+    <string name="time_is_over">Время вышло</string>
+    <string name="seconds">сек</string>
+    <string name="much">много</string>
+    <string name="try_count">попыток</string>
+    <string name="time_offer_reward">бонус за время попыток</string>
+    <string name="time_offer_mulct">штраф за время попыток</string>
+    <!--<string name="count_reward">сделал мало попыток</string>-->
+    <string name="count_reward">перебрал мало вариантов</string>
+    <string name="count_mulct">сделал много попыток</string>
+
+    <string name="time_game_end_game">слишком медленно</string>
+    <string name="quality_end_game">слишком много ошибок</string>
+    <string name="count_end_game">слишком много попыток</string>
+
+    <string name="current_level">Текущий уровень:</string>
+    <string name="level_name_zero">ноль</string>
+    <string name="level_name_bronze">бронза</string>
+    <string name="level_name_silver">серебро</string>
+    <string name="level_name_diamond">бриллиант</string>
+    <string name="level_name_master">мастер</string>
+    <string name="level_name_godlike">богоподобный</string>
+    <string name="level_up">Новый уровень!</string>
+    <string name="your_level_now">Теперь твой уровень:</string>
+    <string name="good_luck">Удачи.</string>
+    <string name="for_coins">Купить следующий уровень за
+        <![CDATA[
+        <font color=\'#FFC107\'>%s</font>
+        ]]>
+        монет</string>
+    <string name="rate">Оценить эту игру</string>
+    <string name="need_more_gold">Нужно больше золота</string>
+    <string name="share_progress">Поделиться прогрессом</string>
+    <string name="to_rules">Правила</string>
+    <string name="kill_progress">Сбросить прогресс</string>
+    <string name="danger">Опасно!</string>
+    <string name="kill_progress_description">Весь твой прогресс будет полностью сброшен и игра начнётся с самого начала. Ты уверен?</string>
+    <string name="kill_progress_long_click_required">Жми долго если действительно уверен</string>
+
+    <string name="share_text">Я заработал %1$s золота и достиг уровня %2$s в игре %3$s\nПопробуй обязательно! Тебе должно понравится.</string>
+
+
+    <string name="show_greeting_title">Приветствую игрок!</string>
+    <string name="show_greeting_submessage">Добро пожаловать. Здесь ты сможешь посоревноваться в скорости мысли. Заработать немного золота. И похвастаться результатами своим друзьям.</string>
+    <string name="show_game_difficults_title">Настрой сложность своей игры.</string>
+    <string name="show_game_difficults_submessage">Длину секрета можно изменить потянув за слайдер. Диапазон возможных цифр настраивается кнопками с названиями сложности. Попробуй (кликабельно).</string>
+    <string name="show_game_settings_title">Следи за игровыми настройками.</string>
+    <string name="show_game_settings_submessage">Здесь ты можешь видеть настройки которые будут действовать для твоей следующей игры. Время всей игры и время только одной попытки. Так же может учитываться количество сделанных попыток и совершённых при этом ошибок. Во время игры могут действовать штрафы, а ещё ты можешь и вовсе проиграть не получив золота совсем.</string>
+    <string name="done">Приступить к игре</string>
+    <string name="show_menu_title">Открой меню чтобы узнать больше.</string>
+    <string name="show_menu_submessage">Здесь ты сможешь увидеть свой прогресс. Заработанное тобой золото. Достигнутый уровень. Так же ты можешь оценить игру, получить помощь и даже сбросить весь свой прогресс (спойлер: если пройдёшь всю игру то реклама исчезнет).</string>
+    <string name="show_new_game_title">Жми \"GO!\" чтобы начать новую игру</string>
+    <string name="show_new_game_submessage">После настройки сложности вы сможете проверить свои силы в настоящем состязании мысли и скорости.</string>
+    <string name="show_add_offer_title">Используй специальную клавиатуру чтобы предложить свой вариант.</string>
+    <string name="show_add_offer_submessage">Выбирай цифры. Если ты не уверен, то можешь сбросить предложение. И когда ты будешь готов смело жми \"OK\". Можешь потыкать сейчас (кликабельно).</string>
+    <string name="show_in_game_title1">Следи за прогрессом.</string>
+    <string name="show_in_game_submessage1">Будь осторожен. Во время игры ты можешь увидеть насколько ты делал предположения быстро и правильно. Так же само собой тебе будут показаны твои быки и коровы.</string>
+    <string name="show_in_game_title2">Ещё следи за результатами.</string>
+    <string name="show_in_game_submessage2">Здесь можно увидеть время всей игры. Сколько ты думал над очередным вариантом. И как много попыток у тебя ещё осталось.</string>
+    <string name="you_can_get_help">Так же ты можешь получить ещё больше помощи.</string>
+    <string name="read_rules_help_text">Читай правила для получения информации об игре и игровых мелочах. Ищи ответы там.\nЕсли что, ты всегда можешь написать автору и задать ему вопрос напрямую stanley.wintergreen.projects@gmail.com</string>
+
+</resources>

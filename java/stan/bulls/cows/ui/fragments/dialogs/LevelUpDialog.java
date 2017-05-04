@@ -97,7 +97,7 @@ public class LevelUpDialog
                 description.setText(R.string.bronze_level_up_description);
                 break;
             case Levels.silver:
-                description.setText(R.string.good_luck);
+                description.setText(R.string.silver_level_up_description);
                 break;
             case Levels.diamond:
                 description.setText(R.string.diamond_level_up_description);
