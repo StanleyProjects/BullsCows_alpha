@@ -108,7 +108,8 @@ public class SandBoxFragment
 
     private void init()
     {
-        banner_ad_unit_id = getActivity().getResources().getString(R.string.banner_ad_unit_id);
+//        banner_ad_unit_id = getActivity().getResources().getString(R.string.banner_ad_unit_id);
+        banner_ad_unit_id = "ca-app-pub-6916191358710501/2519266070";//TODO fix hardcode
 //        difficult.setListener(new DifficultSelector.DifficultListener()
         difficult.setListener(new DifficultPrimarySelector.DifficultListener()
         {
@@ -206,6 +207,7 @@ public class SandBoxFragment
         gameSettings.difficult = Difficults.DIFFICULT_MEDIUM;
         switch(lvl)
         {
+            case Levels.godlike:
             case Levels.master:
                 game_count_seek.setMax(Difficults.MAX_COUNT_MASTER - Difficults.MIN_COUNT);
                 break;

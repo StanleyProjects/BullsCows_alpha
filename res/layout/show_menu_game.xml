@@ -22,20 +22,20 @@
                 android:layout_height="match_parent"/>
         </FrameLayout>
         <LinearLayout
-            android:layout_marginLeft="32dp"
+            android:layout_marginLeft="26dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:text="@string/show_menu_title"
-                android:textSize="24dp"
-                android:layout_marginBottom="8dp"
+                android:textSize="22dp"
+                android:layout_marginBottom="4dp"
                 android:textColor="@color/greydark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:text="@string/show_menu_submessage"
-                android:textSize="18dp"
+                android:textSize="14dp"
                 android:textColor="@color/greydark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -48,20 +48,20 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:gravity="right"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="28dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:text="@string/show_new_game_title"
-                android:textSize="24dp"
-                android:layout_marginBottom="8dp"
+                android:textSize="22dp"
+                android:layout_marginBottom="4dp"
                 android:textColor="@color/greydark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:text="@string/show_new_game_submessage"
-                android:textSize="18dp"
+                android:textSize="14dp"
                 android:textColor="@color/greydark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

@@ -60,7 +60,7 @@
     <string name="silver_level_up_description">Good luck.</string>
     <string name="diamond_level_up_description">Now you can choose hard difficult. Good luck.</string>
     <string name="master_level_up_description">You open all existing features. But you still do not godlike. Good luck.</string>
-    <string name="info">Information</string>
+    <!--<string name="info">Information</string>-->
     <string name="count_elements">Count elements of combination:
         <![CDATA[<big>
         <font color=\'#9C27B0\'>%s</font>
@@ -75,7 +75,7 @@
         </big>]]></string>
     <string name="rate">Rate this game</string>
     <string name="share_progress">Share your progress</string>
-    <string name="help">Get help</string>
+    <!--<string name="help">Get help</string>-->
     <string name="kill_progress">Kill your progress</string>
     <string name="help_url">https://kepocnhh.github.io/</string>
     <string name="show_game_difficults_title">Change difficults your game.</string>

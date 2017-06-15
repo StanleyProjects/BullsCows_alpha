@@ -112,5 +112,11 @@
     <string name="show_in_game_submessage2">Здесь можно увидеть время всей игры. Сколько ты думал над очередным вариантом. И как много попыток у тебя ещё осталось.</string>
     <string name="you_can_get_help">Так же ты можешь получить ещё больше помощи.</string>
     <string name="read_rules_help_text">Читай правила для получения информации об игре и игровых мелочах. Ищи ответы там.\nЕсли что, ты всегда можешь написать автору и задать ему вопрос напрямую stanley.wintergreen.projects@gmail.com</string>
+    <string name="app_name">BullsCows</string>
+    <string name="go">GO!</string>
+    <string name="help_url">https://kepocnhh.github.io/</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6916191358710501/2519266070</string>
+    <string name="ok">Ok</string>
+    <string name="you_lose">Ты проиграл!</string>
 
 </resources>
